@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_in_policy/features/home/home_page.dart';
+import 'package:smart_in_policy/features/policy/presentation/user_policies_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,13 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(
+              title: 'Smartin Policy',
+            ),
+        '/policy': (context) => const ClientPolicyPage(),
+      },
     );
   }
 }

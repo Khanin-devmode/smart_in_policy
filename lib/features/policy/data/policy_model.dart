@@ -8,6 +8,7 @@ class Policy {
   double policyCoverage;
   double policyCost;
   List<Protection> protections = [];
+  List<CashIncome> cashIncomes = [];
 }
 
 class Protection {
@@ -16,4 +17,12 @@ class Protection {
   String name;
   List<int> protectionsYears;
   double protectionAmount;
+}
+
+class CashIncome {
+  CashIncome(this.name, this.cashDueMonths, this.cashAmount);
+
+  String name;
+  List<int> cashDueMonths;
+  double cashAmount;
 }
