@@ -12,15 +12,21 @@ class _ClientPolicyPageState extends State<ClientPolicyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('User Insurance Policies'),
       ),
-      body: ListView(children: const [
+      body: ListView(children: [
         ListTile(
-          title: Text('Policy 1'),
+          title: const Text('Policy 1'),
+          onTap: () {
+            Navigator.pushNamed(context, '/policy-detail');
+          },
         ),
         ListTile(
-          title: Text('Policy 2'),
-        )
+            title: Text('Policy 2'),
+            onTap: () {
+              Navigator.pushNamed(context, '/policy-detail');
+            })
       ]),
     );
   }
