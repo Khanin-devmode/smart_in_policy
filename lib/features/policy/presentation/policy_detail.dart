@@ -11,10 +11,10 @@ class _PolicyDetailPageState extends State<PolicyDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Policy detail')),
+        appBar: AppBar(title: const Text('Policy detail')),
         body: Row(
           children: [
-            Expanded(child: Text('policy')),
+            const Expanded(child: Text('policy')),
             Expanded(
               child: GridView.count(
                 primary: false,

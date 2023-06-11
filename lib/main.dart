@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:smart_in_policy/features/home/home_page.dart';
 import 'package:smart_in_policy/features/policy/presentation/policy_detail.dart';
 import 'package:smart_in_policy/features/policy/presentation/user_policies_page.dart';
@@ -12,6 +13,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Set landscape mode in Android only.
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(

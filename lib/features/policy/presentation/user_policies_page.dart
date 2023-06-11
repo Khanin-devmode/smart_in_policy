@@ -23,7 +23,7 @@ class _ClientPolicyPageState extends State<ClientPolicyPage> {
           },
         ),
         ListTile(
-            title: Text('Policy 2'),
+            title: const Text('Policy 2'),
             onTap: () {
               Navigator.pushNamed(context, '/policy-detail');
             })
