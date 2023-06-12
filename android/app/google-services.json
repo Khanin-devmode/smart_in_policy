@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "655396027836",
+    "project_id": "smart-in-policy",
+    "storage_bucket": "smart-in-policy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655396027836:android:fb0d197661c20c37f3ffb9",
+        "android_client_info": {
+          "package_name": "com.example.smart_in_policy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655396027836-6dcglfj2h5m4acsbkf64htt497o85ap9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDv8A632HxqWlQFn2zxI4nbavhCAEK787E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "655396027836-6dcglfj2h5m4acsbkf64htt497o85ap9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
