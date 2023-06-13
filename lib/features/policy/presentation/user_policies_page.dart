@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_in_policy/constants.dart';
 
 class ClientPolicyPage extends StatefulWidget {
   const ClientPolicyPage({super.key});
@@ -19,13 +20,13 @@ class _ClientPolicyPageState extends State<ClientPolicyPage> {
         ListTile(
           title: const Text('Policy 1'),
           onTap: () {
-            Navigator.pushNamed(context, '/policy-detail');
+            Navigator.pushNamed(context, rPolicyDetail);
           },
         ),
         ListTile(
             title: const Text('Policy 2'),
             onTap: () {
-              Navigator.pushNamed(context, '/policy-detail');
+              Navigator.pushNamed(context, rPolicyDetail);
             })
       ]),
     );

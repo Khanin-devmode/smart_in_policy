@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_in_policy/constants.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage> {
       body: Center(
           child: TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/policy');
+          Navigator.pushNamed(context, rClientPolicy);
         },
         child: const Text('Policies'),
       )),
