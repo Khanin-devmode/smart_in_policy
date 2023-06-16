@@ -13,9 +13,13 @@ class Database {
   late CollectionReference policiesCollection;
 
   Future addPolicy() async {
-    policiesCollection = _firestore.collection('Policies');
+    policiesCollection = _firestore.collection(cPolicies);
 
-    await policiesCollection.add({});
+    try {
+      await policiesCollection.add({
+        'createdBy': 'tempid',
+      });
+    } catch (e) {}
   }
 }
 
