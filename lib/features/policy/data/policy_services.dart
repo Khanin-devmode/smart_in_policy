@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/policy/data/policy_model.dart';
 
-final databaseProvider = Provider<Database>((ref) {
-  return Database();
+final policyServiceProvider = Provider<PolicyService>((ref) {
+  return PolicyService();
 });
 
-class Database {
+class PolicyService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   late CollectionReference policiesCollection;

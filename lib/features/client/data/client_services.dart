@@ -4,11 +4,11 @@ import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/data/client_model.dart';
 import 'package:smart_in_policy/features/policy/data/policy_model.dart';
 
-final databaseProvider = Provider<Database>((ref) {
-  return Database();
+final clientServiceProvider = Provider<ClientService>((ref) {
+  return ClientService();
 });
 
-class Database {
+class ClientService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   late CollectionReference clientsCollection;
