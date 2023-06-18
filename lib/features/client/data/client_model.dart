@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Client {
   Client(this.firstName, this.lastName, this.nickName, this.dateOfBirth,
       this.age, this.martialStatus);

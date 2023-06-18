@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/data/client_model.dart';
@@ -30,3 +31,14 @@ class ClientService {
 final clientPoliciesProvider = StreamProvider<List<Policy>>((ref) async* {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 });
+
+final newClientFormProvider = Provider<NewClientForms>((ref) =>  NewClientForms())
+
+class NewClientForms {
+  TextEditingController firstName = TextEditingController();
+  TextEditingController lastName = TextEditingController();
+  TextEditingController nickName = TextEditingController();
+  TextEditingController martialStatus = TextEditingController();
+  TextEditingController dateOfBirth = TextEditingController();
+}
+
