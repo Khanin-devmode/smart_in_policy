@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smart_in_policy/features/client/data/client_services.dart';
 
-class AddClientDialog extends StatelessWidget {
+class AddClientDialog extends ConsumerWidget {
   const AddClientDialog({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final newClientForm = ref.watch(newClientFormProvider);
+
     return AlertDialog(
       title: const Text('Basic dialog title'),
-      content: const Text(
-        'A dialog is a type of modal window that\n'
-        'appears in front of app content to\n'
-        'provide critical information, or prompt\n'
-        'for a decision to be made.',
+      content: Column(
+        children: [
+          TextField(
+            controller: newClientForm.firstName,
+          )
+        ],
       ),
       actions: <Widget>[
         TextButton(

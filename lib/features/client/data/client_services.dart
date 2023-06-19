@@ -32,7 +32,8 @@ final clientPoliciesProvider = StreamProvider<List<Policy>>((ref) async* {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 });
 
-final newClientFormProvider = Provider<NewClientForms>((ref) =>  NewClientForms())
+final newClientFormProvider =
+    Provider<NewClientForms>((ref) => NewClientForms());
 
 class NewClientForms {
   TextEditingController firstName = TextEditingController();
@@ -41,4 +42,3 @@ class NewClientForms {
   TextEditingController martialStatus = TextEditingController();
   TextEditingController dateOfBirth = TextEditingController();
 }
-
