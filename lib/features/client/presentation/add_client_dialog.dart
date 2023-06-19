@@ -23,9 +23,12 @@ class AddClientDialog extends ConsumerWidget {
           style: TextButton.styleFrom(
             textStyle: Theme.of(context).textTheme.labelLarge,
           ),
-          child: const Text('Disable'),
+          child: const Text('Reset Form'),
           onPressed: () {
-            Navigator.of(context).pop();
+            // Navigator.of(context).pop();
+            ref
+                .read(newClientFormProvider.notifier)
+                .update((state) => NewClientForms());
           },
         ),
         TextButton(

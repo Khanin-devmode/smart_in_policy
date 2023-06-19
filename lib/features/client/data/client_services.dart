@@ -33,7 +33,7 @@ final clientPoliciesProvider = StreamProvider<List<Policy>>((ref) async* {
 });
 
 final newClientFormProvider =
-    Provider<NewClientForms>((ref) => NewClientForms());
+    StateProvider<NewClientForms>((ref) => NewClientForms());
 
 class NewClientForms {
   TextEditingController firstName = TextEditingController();

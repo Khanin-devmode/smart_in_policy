@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     ]);
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Smart in Policy',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
         rClientPolicy: (context) => const ClientPolicyPage(),
         rPolicyDetail: (context) => const PolicyDetailPage(),
       },
+      debugShowCheckedModeBanner: false,
     );
   }
 }
