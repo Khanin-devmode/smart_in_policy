@@ -8,11 +8,11 @@ class Client {
   String nickName;
   DateTime dateOfBirth;
   int age;
-  MartialStatus martialStatus;
+  String martialStatus;
   int? id;
   String? creatdBy;
 
-  Map toCollectionObj() {
+  Map<String, dynamic> toCollectionObj() {
     return {
       'firstName': firstName,
       'lastName': lastName,
@@ -24,4 +24,4 @@ class Client {
   }
 }
 
-enum MartialStatus { single, marriage, divorce }
+enum MartialStatus { single, married, divorce }

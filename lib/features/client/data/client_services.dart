@@ -17,10 +17,12 @@ class ClientService {
   Future addClient(Client newClient) async {
     clientsCollection = _firestore.collection(cClients);
 
-    Map clientMap = newClient.toCollectionObj();
+    Map<String, dynamic> clientMap = newClient.toCollectionObj();
     clientMap['createdBy'] = 'tempUid';
 
+    print(clientMap);
     try {
+      print('adding client');
       await clientsCollection.add(clientMap);
     } catch (e) {
       print(e);
