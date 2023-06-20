@@ -15,7 +15,7 @@ class ClientService {
   late CollectionReference clientsCollection;
 
   Future addClient(Client newClient) async {
-    clientsCollection = _firestore.collection(cClients);
+    clientsCollection = _firestore.collection('Clients');
 
     Map<String, dynamic> clientMap = newClient.toCollectionObj();
     clientMap['createdBy'] = 'tempUid';
