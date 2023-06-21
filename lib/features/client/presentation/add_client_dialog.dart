@@ -15,9 +15,24 @@ class AddClientDialog extends ConsumerWidget {
       title: const Text('Basic dialog title'),
       content: Column(
         children: [
-          TextField(
+          TextFormField(
             controller: newClientForm.firstName,
-          )
+            decoration: const InputDecoration(
+              labelText: 'Firstname',
+            ),
+          ),
+          TextFormField(
+            controller: newClientForm.lastName,
+            decoration: const InputDecoration(
+              labelText: 'Lastname',
+            ),
+          ),
+          TextFormField(
+            controller: newClientForm.nickName,
+            decoration: const InputDecoration(
+              labelText: 'Nickname',
+            ),
+          ),
         ],
       ),
       actions: <Widget>[
@@ -39,15 +54,7 @@ class AddClientDialog extends ConsumerWidget {
           ),
           child: const Text('Add'),
           onPressed: () {
-            clientService
-                .addClient(Client(
-                    'Khanin',
-                    'Chompoosri',
-                    'Nin',
-                    DateTime.utc(1986, 6, 20),
-                    30,
-                    MartialStatus.married.toString()))
-                .then((value) {
+            clientService.addClient(newClientForm.toClientObj()).then((value) {
               ref
                   .read(newClientFormProvider.notifier)
                   .update((state) => NewClientForms());

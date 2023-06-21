@@ -43,4 +43,15 @@ class NewClientForms {
   TextEditingController nickName = TextEditingController();
   TextEditingController martialStatus = TextEditingController();
   TextEditingController dateOfBirth = TextEditingController();
+
+  Client toClientObj() {
+    return Client(
+      firstName.text,
+      lastName.text,
+      nickName.text,
+      DateTime.now(), //temp
+      99, //temp
+      'single', //temp
+    );
+  }
 }
