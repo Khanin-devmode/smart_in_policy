@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/presentation/clients_page.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         rPolicyDetail: (context) => const PolicyDetailPage(),
       },
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
     );
   }
 }

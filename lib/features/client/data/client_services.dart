@@ -42,7 +42,7 @@ class NewClientForms {
   TextEditingController lastName = TextEditingController();
   TextEditingController nickName = TextEditingController();
   TextEditingController martialStatus = TextEditingController();
-  TextEditingController dateOfBirth = TextEditingController();
+  DateTime dateOfBirth = DateTime.now();
 
   Client toClientObj() {
     return Client(

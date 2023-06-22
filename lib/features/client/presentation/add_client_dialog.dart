@@ -33,6 +33,33 @@ class AddClientDialog extends ConsumerWidget {
               labelText: 'Nickname',
             ),
           ),
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('Select Date'),
+            onPressed: () async {
+              Future<DateTime?> dateOfBirth = showDatePicker(
+                locale: Locale('th', 'TH'),
+                context: context,
+                initialDate: newClientForm.dateOfBirth,
+                firstDate: DateTime.utc(1950, 01, 01),
+                lastDate: DateTime.now(),
+              );
+            },
+          ),
+          InputDatePickerFormField(
+            errorFormatText: 'Invalid format',
+            fieldLabelText: 'Date of Birth',
+            firstDate: DateTime.utc(1920, 1, 1),
+            lastDate: DateTime.now(),
+            onDateSubmitted: (value) {
+              print(value.toUtc());
+            },
+            onDateSaved: (value) {
+              print(value.toUtc());
+            },
+          )
         ],
       ),
       actions: <Widget>[
