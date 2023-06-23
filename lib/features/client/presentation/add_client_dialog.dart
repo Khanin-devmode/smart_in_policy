@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smart_in_policy/features/client/data/client_model.dart';
 import 'package:smart_in_policy/features/client/data/client_services.dart';
 
 class AddClientDialog extends ConsumerWidget {
@@ -56,11 +56,56 @@ class AddClientDialog extends ConsumerWidget {
             ),
             Row(
               children: [
-                Expanded(child: TextFormField()),
-                SizedBox(width: 4),
-                Expanded(child: TextFormField()),
-                SizedBox(width: 4),
-                Expanded(child: TextFormField()),
+                Expanded(
+                    child: TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'วัน',
+                  ),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    LengthLimitingTextInputFormatter(2)
+                  ],
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    if (int.parse(value) > 31 || int.parse(value) < 1) {
+                      return 'Please enter date range between 1-31';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    print(int.parse(value));
+                  },
+                )),
+                const SizedBox(width: 4),
+                Expanded(
+                    child: TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'เดือน',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+
+                    return null;
+                  },
+                )),
+                const SizedBox(width: 4),
+                Expanded(
+                    child: TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'ปี(พ.ศ.)',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+
+                    return null;
+                  },
+                )),
               ],
             )
             // TextButton(
