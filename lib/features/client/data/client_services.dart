@@ -55,3 +55,5 @@ class NewClientForms {
     );
   }
 }
+
+final newClientFormKeyProvider = StateProvider((ref) => GlobalKey<FormState>());
