@@ -145,15 +145,17 @@ class AddClientDialog extends ConsumerWidget {
                 return null;
               },
             ),
-            DropdownButtonFormField(
-              items: MartialStatus.values.map((MartialStatus martialStatus) {
-                return DropdownMenuItem<MartialStatus>(
-                  value: martialStatus,
-                  child: Text(martialStatus.name),
-                );
-              }).toList(),
-              onChanged: (value) {},
-            )
+            // DropdownButtonFormField(
+            //   items: MartialStatus.values.map((MartialStatus martialStatus) {
+            //     return DropdownMenuItem<MartialStatus>(
+            //       value: martialStatus,
+            //       child: Text(martialStatus.name),
+            //     );
+            //   }).toList(),
+            //   onChanged: (value) {
+
+            //   },
+            // )
           ],
         ),
       ),
