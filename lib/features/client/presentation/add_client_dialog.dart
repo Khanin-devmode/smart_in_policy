@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smart_in_policy/features/client/data/client_model.dart';
 import 'package:smart_in_policy/features/client/data/client_services.dart';
 
 class AddClientDialog extends ConsumerWidget {
@@ -11,6 +12,7 @@ class AddClientDialog extends ConsumerWidget {
     final newClientForm = ref.watch(newClientFormProvider);
     final clientService = ref.watch(clientServiceProvider);
     final newClientFormKey = ref.watch(newClientFormKeyProvider);
+    final currentYear = DateTime.now().year + 543;
 
     return AlertDialog(
       title: const Text('Basic dialog title'),
@@ -57,84 +59,101 @@ class AddClientDialog extends ConsumerWidget {
             Row(
               children: [
                 Expanded(
-                    child: TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'วัน',
+                  child: TextFormField(
+                    controller: newClientForm.birthDay,
+                    decoration: const InputDecoration(
+                      labelText: 'วัน',
+                    ),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      LengthLimitingTextInputFormatter(2)
+                    ],
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      if (int.parse(value) > 31 || int.parse(value) < 1) {
+                        return 'Please enter date range between 1-31';
+                      }
+                      return null;
+                    },
                   ),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                    LengthLimitingTextInputFormatter(2)
-                  ],
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    if (int.parse(value) > 31 || int.parse(value) < 1) {
-                      return 'Please enter date range between 1-31';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {
-                    print(int.parse(value));
-                  },
-                )),
+                ),
                 const SizedBox(width: 4),
                 Expanded(
-                    child: TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'เดือน',
+                  child: TextFormField(
+                    controller: newClientForm.birthMonth,
+                    decoration: const InputDecoration(
+                      labelText: 'เดือน',
+                    ),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      LengthLimitingTextInputFormatter(2)
+                    ],
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      if (int.parse(value) > 12 || int.parse(value) < 1) {
+                        return 'Please enter month range between 1-12';
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-
-                    return null;
-                  },
-                )),
+                ),
                 const SizedBox(width: 4),
                 Expanded(
-                    child: TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'ปี(พ.ศ.)',
+                  child: TextFormField(
+                    controller: newClientForm.birthYear,
+                    decoration: const InputDecoration(
+                      labelText: 'ปี(พ.ศ.)',
+                    ),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      LengthLimitingTextInputFormatter(4)
+                    ],
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      if (int.parse(value) > currentYear ||
+                          int.parse(value) < 2455) {
+                        return 'Please enter date range between 2455 - $currentYear';
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-
-                    return null;
-                  },
-                )),
+                ),
               ],
+            ),
+            TextFormField(
+              controller: newClientForm.age,
+              decoration: const InputDecoration(
+                labelText: 'อายุ',
+              ),
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                LengthLimitingTextInputFormatter(2)
+              ],
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                if (int.parse(value) > 99 || int.parse(value) < 1) {
+                  return 'Please enter date range between 1-99';
+                }
+                return null;
+              },
+            ),
+            DropdownButtonFormField(
+              items: MartialStatus.values.map((MartialStatus martialStatus) {
+                return DropdownMenuItem<MartialStatus>(
+                  value: martialStatus,
+                  child: Text(martialStatus.name),
+                );
+              }).toList(),
+              onChanged: (value) {},
             )
-            // TextButton(
-            //   style: TextButton.styleFrom(
-            //     textStyle: Theme.of(context).textTheme.labelLarge,
-            //   ),
-            //   child: const Text('Select Date'),
-            //   onPressed: () async {
-            //     Future<DateTime?> dateOfBirth = showDatePicker(
-            //       locale: Locale('th', 'TH'),
-            //       context: context,
-            //       initialDate: newClientForm.dateOfBirth,
-            //       firstDate: DateTime.utc(1950, 01, 01),
-            //       lastDate: DateTime.now(),
-            //     );
-            //   },
-            // ),
-            // InputDatePickerFormField(
-            //   errorFormatText: 'Invalid format',
-            //   fieldLabelText: 'Date of Birth',
-            //   firstDate: DateTime.utc(1920, 1, 1),
-            //   lastDate: DateTime.now(),
-            //   onDateSubmitted: (value) {
-            //     print(value.toUtc());
-            //   },
-            //   onDateSaved: (value) {
-            //     print(value.toUtc());
-            //   },
-            // )
           ],
         ),
       ),

@@ -1,14 +1,16 @@
-import 'package:flutter/material.dart';
-
 class Client {
-  Client(this.firstName, this.lastName, this.nickName, this.dateOfBirth,
-      this.age, this.martialStatus);
+  Client(
+    this.firstName,
+    this.lastName,
+    this.nickName,
+    this.dateOfBirth,
+    this.age,
+  );
   String firstName;
   String lastName;
   String nickName;
   DateTime dateOfBirth;
   int age;
-  String martialStatus;
   int? id;
   String? creatdBy;
 
@@ -19,7 +21,6 @@ class Client {
       'nickName': nickName,
       'dateOfBirth': dateOfBirth,
       'age': age,
-      'martialStaus': martialStatus,
     };
   }
 }

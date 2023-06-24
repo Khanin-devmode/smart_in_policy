@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/data/client_model.dart';
 import 'package:smart_in_policy/features/policy/data/policy_model.dart';
 
@@ -42,16 +41,19 @@ class NewClientForms {
   TextEditingController lastName = TextEditingController();
   TextEditingController nickName = TextEditingController();
   TextEditingController martialStatus = TextEditingController();
-  DateTime dateOfBirth = DateTime.now();
+  TextEditingController birthDay = TextEditingController();
+  TextEditingController birthMonth = TextEditingController();
+  TextEditingController birthYear = TextEditingController();
+  TextEditingController age = TextEditingController();
 
   Client toClientObj() {
     return Client(
       firstName.text,
       lastName.text,
       nickName.text,
-      DateTime.now(), //temp
-      99, //temp
-      'single', //temp
+      DateTime.utc(int.parse(birthYear.text) - 543, int.parse(birthMonth.text),
+          int.parse(birthDay.text)),
+      int.parse(age.text),
     );
   }
 }
