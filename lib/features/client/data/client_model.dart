@@ -1,17 +1,13 @@
 class Client {
   Client(
-    this.firstName,
-    this.lastName,
-    this.nickName,
-    this.dateOfBirth,
-    this.age,
-  );
+      this.firstName, this.lastName, this.nickName, this.dateOfBirth, this.age,
+      [this.id, this.creatdBy]);
   String firstName;
   String lastName;
   String nickName;
   DateTime dateOfBirth;
   int age;
-  int? id;
+  String? id;
   String? creatdBy;
 
   Map<String, dynamic> toCollectionObj() {

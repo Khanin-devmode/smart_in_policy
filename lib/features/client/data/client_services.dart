@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/data/client_model.dart';
 import 'package:smart_in_policy/features/policy/data/policy_model.dart';
 
@@ -19,9 +20,7 @@ class ClientService {
     Map<String, dynamic> clientMap = newClient.toCollectionObj();
     clientMap['createdBy'] = 'tempUid';
 
-    print(clientMap);
     try {
-      print('adding client');
       await clientsCollection.add(clientMap);
     } catch (e) {
       print(e);
@@ -29,9 +28,7 @@ class ClientService {
   }
 }
 
-final clientPoliciesProvider = StreamProvider<List<Policy>>((ref) async* {
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
-});
+final newClientFormKeyProvider = StateProvider((ref) => GlobalKey<FormState>());
 
 final newClientFormProvider =
     StateProvider<NewClientForms>((ref) => NewClientForms());
@@ -58,4 +55,43 @@ class NewClientForms {
   }
 }
 
-final newClientFormKeyProvider = StateProvider((ref) => GlobalKey<FormState>());
+final clientsProvider = StreamProvider<List<Client>>((ref) async* {
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  var allClient = const <Client>[];
+
+  await for (var snapshot in firestore
+      .collection(cClients)
+      // .where('createdBy', isEqualTo: user.uid)
+      .snapshots()) {
+    allClient = [];
+
+    if (snapshot.docs.isNotEmpty) {
+      for (DocumentSnapshot clientDoc in snapshot.docs) {
+        // List<dynamic> colorList = colorPaletteDoc.get('colorPalette');
+        // List<Color> colorPalette = List.generate(
+        //   colorList.length,
+        //   (index) => hexToColor(colorList[index]),
+        // );
+
+        // ColorPaletteDoc savedColorPalette =
+        //     ColorPaletteDoc(colorPaletteDoc.id, colorPalette);
+        // savedColorPalette.timeCreated = colorPaletteDoc.get('timeCreated');
+        Client client = Client(
+          clientDoc.get('firstName'),
+          clientDoc.get('lastName'),
+          clientDoc.get('nickName'),
+          clientDoc.get('dateOfBirth'),
+          clientDoc.get('age'),
+          clientDoc.get('uid'),
+          clientDoc.get('createdBy'),
+        );
+
+        allClient = [...allClient, client];
+        yield allClient;
+      }
+    } else {
+      yield allClient;
+    }
+  }
+});

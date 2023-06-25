@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smart_in_policy/features/client/data/client_model.dart';
 import 'package:smart_in_policy/features/client/data/client_services.dart';
 
 class AddClientDialog extends ConsumerWidget {
@@ -15,7 +14,7 @@ class AddClientDialog extends ConsumerWidget {
     final currentYear = DateTime.now().year + 543;
 
     return AlertDialog(
-      title: const Text('Basic dialog title'),
+      title: const Text('New Client Form'),
       content: Form(
         key: newClientFormKey,
         child: Column(
