@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_in_policy/features/client/data/client_services.dart';
 import 'package:smart_in_policy/features/client/presentation/add_client_dialog.dart';
+import 'package:smart_in_policy/helper_functions.dart';
 
 class ClientsPage extends ConsumerStatefulWidget {
   const ClientsPage({super.key});
@@ -40,7 +41,13 @@ class ClientsPageState extends ConsumerState<ClientsPage> {
                 //     activeIndex: activeIndex,
                 //     docId: color.docId,
                 //     db: db);
-                return ListTile(title: Text(allClient[index].firstName));
+
+                DateTime dateOfBirth = allClient[index].dateOfBirth;
+
+                return ListTile(
+                  title: Text(allClient[index].firstName),
+                  subtitle: Text(getCurrentAge(dateOfBirth).toString()),
+                );
               },
             );
           } else {
