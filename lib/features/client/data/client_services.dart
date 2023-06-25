@@ -81,9 +81,9 @@ final clientsProvider = StreamProvider<List<Client>>((ref) async* {
           clientDoc.get('firstName'),
           clientDoc.get('lastName'),
           clientDoc.get('nickName'),
-          clientDoc.get('dateOfBirth'),
+          DateTime.now(),
           clientDoc.get('age'),
-          clientDoc.get('uid'),
+          clientDoc.id,
           clientDoc.get('createdBy'),
         );
 
