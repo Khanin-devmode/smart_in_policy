@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/data/client_model.dart';
-import 'package:smart_in_policy/features/policy/data/policy_model.dart';
 
 final clientServiceProvider = Provider<ClientService>((ref) {
   return ClientService();
@@ -68,20 +67,15 @@ final clientsProvider = StreamProvider<List<Client>>((ref) async* {
 
     if (snapshot.docs.isNotEmpty) {
       for (DocumentSnapshot clientDoc in snapshot.docs) {
-        // List<dynamic> colorList = colorPaletteDoc.get('colorPalette');
-        // List<Color> colorPalette = List.generate(
-        //   colorList.length,
-        //   (index) => hexToColor(colorList[index]),
-        // );
+        Timestamp timestamp = clientDoc.get('dateOfBirth');
+        DateTime dateOfBirth =
+            DateTime.fromMillisecondsSinceEpoch(timestamp.seconds * 1000);
 
-        // ColorPaletteDoc savedColorPalette =
-        //     ColorPaletteDoc(colorPaletteDoc.id, colorPalette);
-        // savedColorPalette.timeCreated = colorPaletteDoc.get('timeCreated');
         Client client = Client(
           clientDoc.get('firstName'),
           clientDoc.get('lastName'),
           clientDoc.get('nickName'),
-          DateTime.now(),
+          dateOfBirth,
           clientDoc.get('age'),
           clientDoc.id,
           clientDoc.get('createdBy'),
