@@ -14,7 +14,7 @@ class ClientService {
   late CollectionReference clientsCollection;
 
   Future addClient(Client newClient) async {
-    clientsCollection = _firestore.collection('Clients');
+    clientsCollection = _firestore.collection(cClients);
 
     Map<String, dynamic> clientMap = newClient.toCollectionObj();
     clientMap['createdBy'] = 'tempUid';
@@ -23,6 +23,16 @@ class ClientService {
       await clientsCollection.add(clientMap);
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future deleteClient(Client client) async {
+    clientsCollection = _firestore.collection(cClients);
+    try {
+      await clientsCollection.doc(client.id).delete();
+      // return true;
+    } catch (e) {
+      // return Future.error(e);
     }
   }
 }

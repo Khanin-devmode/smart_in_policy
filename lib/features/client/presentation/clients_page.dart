@@ -15,6 +15,8 @@ class ClientsPageState extends ConsumerState<ClientsPage> {
   @override
   Widget build(BuildContext context) {
     final allClient = ref.watch(clientsProvider);
+    final clientService = ref.watch(clientServiceProvider);
+
     print(allClient);
 
     return Scaffold(
@@ -23,7 +25,8 @@ class ClientsPageState extends ConsumerState<ClientsPage> {
         title: const Text('Clients'),
         actions: [
           IconButton(
-              onPressed: () => _dialogBuilder(context), icon: Icon(Icons.add))
+              onPressed: () => _dialogBuilder(context),
+              icon: const Icon(Icons.add))
         ],
       ),
       body: allClient.when(
@@ -47,6 +50,15 @@ class ClientsPageState extends ConsumerState<ClientsPage> {
                 return ListTile(
                   title: Text(allClient[index].firstName),
                   subtitle: Text(getCurrentAge(dateOfBirth).toString()),
+                  trailing: IconButton(
+                    onPressed: () => removeClientBuilder(
+                      context,
+                      () => clientService
+                          .deleteClient(allClient[index])
+                          .then((value) => Navigator.pop(context)),
+                    ),
+                    icon: const Icon(Icons.remove),
+                  ),
                 );
               },
             );
@@ -68,5 +80,26 @@ class ClientsPageState extends ConsumerState<ClientsPage> {
         return const AddClientDialog();
       },
     );
+  }
+
+  Future<void> removeClientBuilder(BuildContext context, Function removeFn) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Confirm remove?'),
+            content: const Text('Are you sure you want to remove client?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () => removeFn(),
+                child: const Text('Confirm'),
+              )
+            ],
+          );
+        });
   }
 }
