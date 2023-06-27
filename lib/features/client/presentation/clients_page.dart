@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/data/client_services.dart';
 import 'package:smart_in_policy/features/client/presentation/add_client_dialog.dart';
+import 'package:smart_in_policy/features/policy/data/policy_services.dart';
 import 'package:smart_in_policy/helper_functions.dart';
 
 class ClientsPage extends ConsumerStatefulWidget {
@@ -17,7 +19,7 @@ class ClientsPageState extends ConsumerState<ClientsPage> {
     final allClient = ref.watch(clientsProvider);
     final clientService = ref.watch(clientServiceProvider);
 
-    print(allClient);
+    // print(allClient);
 
     return Scaffold(
       appBar: AppBar(
@@ -59,6 +61,12 @@ class ClientsPageState extends ConsumerState<ClientsPage> {
                     ),
                     icon: const Icon(Icons.remove),
                   ),
+                  onTap: () {
+                    ref
+                        .read(selectedClientProvider.notifier)
+                        .update((state) => allClient[index]);
+                    Navigator.pushNamed(context, rClientPolicy);
+                  },
                 );
               },
             );

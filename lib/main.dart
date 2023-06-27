@@ -5,11 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/presentation/clients_page.dart';
 import 'package:smart_in_policy/features/policy/presentation/policy_detail.dart';
-import 'package:smart_in_policy/features/policy/presentation/user_policies_page.dart';
+import 'package:smart_in_policy/features/policy/presentation/client_policies_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

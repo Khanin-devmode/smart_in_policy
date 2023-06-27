@@ -19,6 +19,14 @@ class Client {
       'age': age,
     };
   }
+
+  // Client copyWith({String? id, String? description, bool? completed}) {
+  //   return Client(
+  //     id: id ?? this.id,
+  //     description: description ?? this.description,
+  //     completed: completed ?? this.completed,
+  //   );
+  // }
 }
 
 enum MartialStatus { single, married, divorce }

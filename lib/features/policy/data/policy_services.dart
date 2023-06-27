@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_in_policy/constants.dart';
+import 'package:smart_in_policy/features/client/data/client_model.dart';
 import 'package:smart_in_policy/features/policy/data/policy_model.dart';
+
+final selectedClientProvider = StateProvider<Client?>((ref) => null);
 
 final policyServiceProvider = Provider<PolicyService>((ref) {
   return PolicyService();
