@@ -27,7 +27,7 @@ class ClientsPageState extends ConsumerState<ClientsPage> {
         title: const Text('Clients'),
         actions: [
           IconButton(
-              onPressed: () => _dialogBuilder(context),
+              onPressed: () => newClientDialogBuilder(context),
               icon: const Icon(Icons.add))
         ],
       ),
@@ -53,7 +53,7 @@ class ClientsPageState extends ConsumerState<ClientsPage> {
                   title: Text(allClient[index].firstName),
                   subtitle: Text(getCurrentAge(dateOfBirth).toString()),
                   trailing: IconButton(
-                    onPressed: () => removeClientBuilder(
+                    onPressed: () => removeClientDialogBuilder(
                       context,
                       () => clientService
                           .deleteClient(allClient[index])
@@ -81,16 +81,8 @@ class ClientsPageState extends ConsumerState<ClientsPage> {
     );
   }
 
-  Future<void> _dialogBuilder(BuildContext context) {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return const AddClientDialog();
-      },
-    );
-  }
-
-  Future<void> removeClientBuilder(BuildContext context, Function removeFn) {
+  Future<void> removeClientDialogBuilder(
+      BuildContext context, Function removeFn) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {

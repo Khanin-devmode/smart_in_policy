@@ -55,3 +55,6 @@ final clientPoliciesProvider = StreamProvider<List<Policy>>((ref) async* {
   //   }
   // }
 });
+
+final newPolicyFormProvider =
+    StateProvider<NewPolicyForms>((ref) => NewPolicyForms());

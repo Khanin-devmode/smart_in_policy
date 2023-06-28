@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/data/client_model.dart';
 import 'package:smart_in_policy/features/policy/data/policy_services.dart';
+import 'package:smart_in_policy/features/policy/presentation/add_policy_dialog.dart';
 
 class ClientPolicyPage extends ConsumerStatefulWidget {
   const ClientPolicyPage({super.key});
@@ -26,6 +27,12 @@ class ClientPolicyPageState extends ConsumerState<ClientPolicyPage> {
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: const Text('User Insurance Policies'),
+          actions: [
+            IconButton(
+              onPressed: () => newPolicyDialogBuilder(context),
+              icon: const Icon(Icons.add),
+            )
+          ],
         ),
         body: Row(
           children: [

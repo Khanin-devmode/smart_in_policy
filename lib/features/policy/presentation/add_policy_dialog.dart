@@ -3,17 +3,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_in_policy/features/client/data/client_services.dart';
 
-Future<void> newClientDialogBuilder(BuildContext context) {
+Future<void> newPolicyDialogBuilder(BuildContext context) {
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
-      return const AddClientDialog();
+      return const AddPolicyDialog();
     },
   );
 }
 
-class AddClientDialog extends ConsumerWidget {
-  const AddClientDialog({super.key});
+class AddPolicyDialog extends ConsumerWidget {
+  const AddPolicyDialog({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,7 +23,7 @@ class AddClientDialog extends ConsumerWidget {
     final currentYear = DateTime.now().year + 543;
 
     return AlertDialog(
-      title: const Text('New Client Form'),
+      title: const Text('New Policy Form'),
       content: Form(
         key: newClientFormKey,
         child: Column(
