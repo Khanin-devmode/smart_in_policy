@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Policy {
-  Policy(this.policyNumber, this.startDate, this.endDate, this.policyCoverage,
-      this.policyCost);
+  Policy(this.policyNumber, this.policyName, this.policyCompany, this.startDate,
+      this.endDate, this.policyCoverage, this.policyCost);
 
   String policyNumber;
+  String policyName;
+  String policyCompany;
   DateTime startDate;
   DateTime endDate;
   double policyCoverage;
@@ -36,6 +38,7 @@ final newClientFormProvider =
 class NewPolicyForms {
   TextEditingController number = TextEditingController();
   TextEditingController name = TextEditingController();
+  TextEditingController company = TextEditingController();
   TextEditingController startDay = TextEditingController();
   TextEditingController startMonth = TextEditingController();
   TextEditingController startYear = TextEditingController();
@@ -43,15 +46,22 @@ class NewPolicyForms {
   TextEditingController endMonth = TextEditingController();
   TextEditingController endYear = TextEditingController();
   TextEditingController coverage = TextEditingController();
+  TextEditingController cost = TextEditingController();
 
-  // Client toClientObj() {
-  //   return Client(
-  //     firstName.text,
-  //     lastName.text,
-  //     nickName.text,
-  //     DateTime.utc(int.parse(birthYear.text) - 543, int.parse(birthMonth.text),
-  //         int.parse(birthDay.text)),
-  //     int.parse(age.text),
-  //   );
-  // }
+  Policy toPolicyObj() {
+    return Policy(
+      number.text,
+      name.text,
+      company.text,
+
+      DateTime.utc(int.parse(startYear.text) - 543, int.parse(startMonth.text),
+          int.parse(startDay.text)), //startDate
+      DateTime.utc(int.parse(endYear.text) - 543, int.parse(endMonth.text),
+          int.parse(endDay.text)),
+      //endDate
+
+      double.parse(coverage.text),
+      double.parse(cost.text),
+    );
+  }
 }
