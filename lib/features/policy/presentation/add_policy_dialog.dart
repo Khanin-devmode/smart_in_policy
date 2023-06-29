@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_in_policy/features/client/data/client_services.dart';
+import 'package:smart_in_policy/features/policy/data/policy_services.dart';
 
 Future<void> newPolicyDialogBuilder(BuildContext context) {
   return showDialog<void>(
@@ -17,21 +18,21 @@ class AddPolicyDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final newClientForm = ref.watch(newClientFormProvider);
-    final clientService = ref.watch(clientServiceProvider);
-    final newClientFormKey = ref.watch(newClientFormKeyProvider);
+    final newPolicyForm = ref.watch(newPolicyFormProvider);
+    final policyService = ref.watch(policyServiceProvider);
+    final newPolicyFormKey = ref.watch(newPolicyFormKeyProvider);
     final currentYear = DateTime.now().year + 543;
 
     return AlertDialog(
       title: const Text('New Policy Form'),
       content: Form(
-        key: newClientFormKey,
+        key: newPolicyFormKey,
         child: Column(
           children: [
             TextFormField(
-              controller: newClientForm.firstName,
+              controller: newPolicyForm.company,
               decoration: const InputDecoration(
-                labelText: 'Firstname',
+                labelText: 'Policy Company',
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -41,9 +42,9 @@ class AddPolicyDialog extends ConsumerWidget {
               },
             ),
             TextFormField(
-              controller: newClientForm.lastName,
+              controller: newPolicyForm.name,
               decoration: const InputDecoration(
-                labelText: 'Lastname',
+                labelText: 'Policy Name',
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -53,9 +54,9 @@ class AddPolicyDialog extends ConsumerWidget {
               },
             ),
             TextFormField(
-              controller: newClientForm.nickName,
+              controller: newPolicyForm.number,
               decoration: const InputDecoration(
-                labelText: 'Nickname',
+                labelText: 'Policy Number',
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -186,15 +187,15 @@ class AddPolicyDialog extends ConsumerWidget {
           ),
           child: const Text('Add'),
           onPressed: () {
-            if (newClientFormKey.currentState!.validate()) {
-              clientService
-                  .addClient(newClientForm.toClientObj())
-                  .then((value) {
-                ref
-                    .read(newClientFormProvider.notifier)
-                    .update((state) => NewClientForms());
-                Navigator.pop(context);
-              });
+            if (newPolicyFormKey.currentState!.validate()) {
+              // clientService
+              //     .addClient(newClientForm.toClientObj())
+              //     .then((value) {
+              //   ref
+              //       .read(newClientFormProvider.notifier)
+              //       .update((state) => NewClientForms());
+              //   Navigator.pop(context);
+              // });
             }
           },
         ),
