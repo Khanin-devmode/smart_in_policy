@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_in_policy/features/client/data/client_services.dart';
+import 'package:smart_in_policy/features/policy/data/policy_model.dart';
 import 'package:smart_in_policy/features/policy/data/policy_services.dart';
 
 Future<void> newPolicyDialogBuilder(BuildContext context) {
@@ -65,11 +66,12 @@ class AddPolicyDialog extends ConsumerWidget {
                 return null;
               },
             ),
+            Text('วันที่เริ่มสัญญา'),
             Row(
               children: [
                 Expanded(
                   child: TextFormField(
-                    controller: newClientForm.birthDay,
+                    controller: newPolicyForm.startDay,
                     decoration: const InputDecoration(
                       labelText: 'วัน',
                     ),
@@ -91,7 +93,7 @@ class AddPolicyDialog extends ConsumerWidget {
                 const SizedBox(width: 4),
                 Expanded(
                   child: TextFormField(
-                    controller: newClientForm.birthMonth,
+                    controller: newPolicyForm.startMonth,
                     decoration: const InputDecoration(
                       labelText: 'เดือน',
                     ),
@@ -113,7 +115,7 @@ class AddPolicyDialog extends ConsumerWidget {
                 const SizedBox(width: 4),
                 Expanded(
                   child: TextFormField(
-                    controller: newClientForm.birthYear,
+                    controller: newPolicyForm.startYear,
                     decoration: const InputDecoration(
                       labelText: 'ปี(พ.ศ.)',
                     ),
@@ -135,22 +137,109 @@ class AddPolicyDialog extends ConsumerWidget {
                 ),
               ],
             ),
+            Text('วันสิ้นสุดสัญญา'),
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    controller: newPolicyForm.endDay,
+                    decoration: const InputDecoration(
+                      labelText: 'วัน',
+                    ),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      LengthLimitingTextInputFormatter(2)
+                    ],
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      if (int.parse(value) > 31 || int.parse(value) < 1) {
+                        return 'Please enter date range between 1-31';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                const SizedBox(width: 4),
+                Expanded(
+                  child: TextFormField(
+                    controller: newPolicyForm.endMonth,
+                    decoration: const InputDecoration(
+                      labelText: 'เดือน',
+                    ),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      LengthLimitingTextInputFormatter(2)
+                    ],
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      if (int.parse(value) > 12 || int.parse(value) < 1) {
+                        return 'Please enter month range between 1-12';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                const SizedBox(width: 4),
+                Expanded(
+                  child: TextFormField(
+                    controller: newPolicyForm.endYear,
+                    decoration: const InputDecoration(
+                      labelText: 'ปี(พ.ศ.)',
+                    ),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      LengthLimitingTextInputFormatter(4)
+                    ],
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      if (int.parse(value) < currentYear) {
+                        return 'Please enter date range greater than $currentYear';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+              ],
+            ),
             TextFormField(
-              controller: newClientForm.age,
+              controller: newPolicyForm.coverage,
               decoration: const InputDecoration(
-                labelText: 'อายุ',
+                labelText: 'ความคุ้มครอง',
               ),
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                LengthLimitingTextInputFormatter(2)
               ],
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter some text';
                 }
-                if (int.parse(value) > 99 || int.parse(value) < 1) {
-                  return 'Please enter date range between 1-99';
+                // if (int.parse(value) > 99 || int.parse(value) < 1) {
+                //   return 'Please enter date range between 1-99';
+                // }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: newPolicyForm.cost,
+              decoration: const InputDecoration(
+                labelText: 'เบี้ยประกัน',
+              ),
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+              ],
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
                 }
+                // if (int.parse(value) > 99 || int.parse(value) < 1) {
+                //   return 'Please enter date range between 1-99';
+                // }
                 return null;
               },
             ),
@@ -177,8 +266,8 @@ class AddPolicyDialog extends ConsumerWidget {
           onPressed: () {
             // Navigator.of(context).pop();
             ref
-                .read(newClientFormProvider.notifier)
-                .update((state) => NewClientForms());
+                .read(newPolicyFormProvider.notifier)
+                .update((state) => NewPolicyForms());
           },
         ),
         TextButton(
