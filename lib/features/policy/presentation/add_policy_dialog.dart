@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smart_in_policy/features/client/data/client_services.dart';
 import 'package:smart_in_policy/features/policy/data/policy_model.dart';
 import 'package:smart_in_policy/features/policy/data/policy_services.dart';
 
@@ -23,6 +22,7 @@ class AddPolicyDialog extends ConsumerWidget {
     final policyService = ref.watch(policyServiceProvider);
     final newPolicyFormKey = ref.watch(newPolicyFormKeyProvider);
     final currentYear = DateTime.now().year + 543;
+    final selectedClient = ref.watch(selectedClientProvider);
 
     return AlertDialog(
       title: const Text('New Policy Form'),
@@ -198,8 +198,8 @@ class AddPolicyDialog extends ConsumerWidget {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
                       }
-                      if (int.parse(value) < currentYear) {
-                        return 'Please enter date range greater than $currentYear';
+                      if (int.parse(value) < 2455) {
+                        return 'Please enter date range greater than 2455';
                       }
                       return null;
                     },
@@ -277,6 +277,14 @@ class AddPolicyDialog extends ConsumerWidget {
           child: const Text('Add'),
           onPressed: () {
             if (newPolicyFormKey.currentState!.validate()) {
+              policyService
+                  .addPolicy(newPolicyForm.toPolicyObj(), selectedClient)
+                  .then((value) {
+                ref
+                    .read(newPolicyFormProvider.notifier)
+                    .update((state) => NewPolicyForms());
+                Navigator.pop(context);
+              });
               // clientService
               //     .addClient(newClientForm.toClientObj())
               //     .then((value) {

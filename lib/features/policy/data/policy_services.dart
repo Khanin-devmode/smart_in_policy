@@ -16,13 +16,13 @@ class PolicyService {
 
   late CollectionReference policiesCollection;
 
-  Future addPolicy() async {
+  Future addPolicy(Policy newPolicy, Client? client) async {
+    Map<String, dynamic> policyMap = newPolicy.toCollectionObj();
+    policyMap['clientId'] = client!.id;
     policiesCollection = _firestore.collection(cPolicies);
 
     try {
-      await policiesCollection.add({
-        'createdBy': 'tempid',
-      });
+      await policiesCollection.add(policyMap);
     } catch (e) {}
   }
 }

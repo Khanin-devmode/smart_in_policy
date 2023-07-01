@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Policy {
   Policy(this.policyNumber, this.policyName, this.policyCompany, this.startDate,
-      this.endDate, this.policyCoverage, this.policyCost);
+      this.endDate, this.policyCoverage, this.policyCost,
+      [this.clientId]);
 
   String policyNumber;
   String policyName;
@@ -12,8 +13,21 @@ class Policy {
   DateTime endDate;
   double policyCoverage;
   double policyCost;
+  String? clientId;
   List<Protection> protections = [];
   List<CashIncome> cashIncomes = [];
+
+  Map<String, dynamic> toCollectionObj() {
+    return {
+      'policyNumber': policyNumber,
+      'policyName': policyName,
+      'policyCompany': policyCompany,
+      'startDate': startDate,
+      'endDate': endDate,
+      'policyCoverage': policyCoverage,
+      'policyCost': policyCost,
+    };
+  }
 }
 
 class Protection {
