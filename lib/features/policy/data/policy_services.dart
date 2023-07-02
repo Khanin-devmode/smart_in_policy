@@ -28,7 +28,7 @@ class PolicyService {
   }
 }
 
-final clientPolicies = StreamProvider<List<Policy>>((ref) async* {
+final clientPoliciesStreamProvider = StreamProvider<List<Policy>>((ref) async* {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   var clientPolicy = const <Policy>[];

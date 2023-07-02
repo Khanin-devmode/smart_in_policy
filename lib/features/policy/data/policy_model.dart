@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class Policy {
   Policy(this.policyNumber, this.policyName, this.policyCompany, this.startDate,
       this.endDate, this.policyCoverage, this.policyCost,
-      [this.clientId]);
+      [this.id, this.clientId]);
 
   String policyNumber;
   String policyName;
@@ -13,6 +13,7 @@ class Policy {
   DateTime endDate;
   double policyCoverage;
   double policyCost;
+  String? id;
   String? clientId;
   List<Protection> protections = [];
   List<CashIncome> cashIncomes = [];
