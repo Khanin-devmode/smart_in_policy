@@ -45,18 +45,20 @@ final clientPolicies = StreamProvider<List<Policy>>((ref) async* {
         DateTime startDate = toDateTime(clientPolicyDoc.get('startDate'));
         DateTime endDate = toDateTime(clientPolicyDoc.get('endDate'));
 
-        // Client client = Client(
-        //   clientDoc.get('firstName'),
-        //   clientDoc.get('lastName'),
-        //   clientDoc.get('nickName'),
-        //   dateOfBirth,
-        //   clientDoc.get('age'),
-        //   clientDoc.id,
-        //   clientDoc.get('createdBy'),
-        // );
+        Policy policy = Policy(
+          clientPolicyDoc.get('policyNumber'),
+          clientPolicyDoc.get('policyName'),
+          clientPolicyDoc.get('policyCompany'),
+          startDate,
+          endDate,
+          clientPolicyDoc.get('policyCoverage'),
+          clientPolicyDoc.get('policyCost'),
+          clientPolicyDoc.id,
+          clientPolicyDoc.get('clientId'),
+        );
 
-        // clientPolicy = [...clientPolicy, client];
-        // yield clientPolicy;
+        clientPolicy = [...clientPolicy, policy];
+        yield clientPolicy;
       }
     } else {
       yield clientPolicy;
