@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/data/client_model.dart';
 import 'package:smart_in_policy/features/policy/data/policy_model.dart';
+import 'package:smart_in_policy/helper_functions.dart';
 
 final selectedClientProvider = StateProvider<Client?>((ref) => null);
 
@@ -27,34 +28,40 @@ class PolicyService {
   }
 }
 
-final clientPoliciesProvider = StreamProvider<List<Policy>>((ref) async* {
+final clientPolicies = StreamProvider<List<Policy>>((ref) async* {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  // var allColorDoc = const <ColorDoc>[];
+  var clientPolicy = const <Policy>[];
+  Client? selctedClient = ref.watch(selectedClientProvider);
 
-  // final user = ref.watch(authStateProvider).value;
+  await for (var snapshot in firestore
+      .collection(cPolicies)
+      .where('clientId', isEqualTo: selctedClient!.id)
+      .snapshots()) {
+    clientPolicy = [];
 
-  // while (user != null) {
-  //   await for (var snapshot in firestore
-  //       .collection(cPolicies)
-  //       .where('createdBy', isEqualTo: user.uid)
-  //       .snapshots()) {
-  //     allColorDoc = [];
+    if (snapshot.docs.isNotEmpty) {
+      for (DocumentSnapshot clientPolicyDoc in snapshot.docs) {
+        DateTime startDate = toDateTime(clientPolicyDoc.get('startDate'));
+        DateTime endDate = toDateTime(clientPolicyDoc.get('endDate'));
 
-  //     if (snapshot.docs.isNotEmpty) {
-  //       for (DocumentSnapshot colorDoc in snapshot.docs) {
-  //         Color color = hexToColor(colorDoc.get('colorHex'));
+        // Client client = Client(
+        //   clientDoc.get('firstName'),
+        //   clientDoc.get('lastName'),
+        //   clientDoc.get('nickName'),
+        //   dateOfBirth,
+        //   clientDoc.get('age'),
+        //   clientDoc.id,
+        //   clientDoc.get('createdBy'),
+        // );
 
-  //         var savedColor = ColorDoc(colorDoc.id, color);
-
-  //         allColorDoc = [...allColorDoc, savedColor];
-  //         yield allColorDoc;
-  //       }
-  //     } else {
-  //       yield [];
-  //     }
-  //   }
-  // }
+        // clientPolicy = [...clientPolicy, client];
+        // yield clientPolicy;
+      }
+    } else {
+      yield clientPolicy;
+    }
+  }
 });
 
 final newPolicyFormProvider =

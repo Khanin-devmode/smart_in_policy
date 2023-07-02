@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 int getCurrentAge(DateTime dateOfBirth) {
   final DateTime currentDate = DateTime.now();
   int age;
@@ -15,4 +17,8 @@ int getCurrentAge(DateTime dateOfBirth) {
   }
 
   return age;
+}
+
+DateTime toDateTime(Timestamp timestamp) {
+  return DateTime.fromMillisecondsSinceEpoch(timestamp.seconds * 1000);
 }
