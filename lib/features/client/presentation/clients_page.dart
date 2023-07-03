@@ -39,14 +39,6 @@ class ClientsPageState extends ConsumerState<ClientsPage> {
               reverse: false,
               itemCount: allClient.length,
               itemBuilder: (context, index) {
-                // ColorDoc color = allColors[index];
-                // return SavedColorRow(
-                //     color: color.color,
-                //     notifier: colorlistNofifier,
-                //     activeIndex: activeIndex,
-                //     docId: color.docId,
-                //     db: db);
-
                 DateTime dateOfBirth = allClient[index].dateOfBirth;
 
                 return ListTile(
@@ -84,22 +76,23 @@ class ClientsPageState extends ConsumerState<ClientsPage> {
   Future<void> removeClientDialogBuilder(
       BuildContext context, Function removeFn) {
     return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Confirm remove?'),
-            content: const Text('Are you sure you want to remove client?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () => removeFn(),
-                child: const Text('Confirm'),
-              )
-            ],
-          );
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirm remove?'),
+          content: const Text('Are you sure you want to remove client?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => removeFn(),
+              child: const Text('Confirm'),
+            )
+          ],
+        );
+      },
+    );
   }
 }

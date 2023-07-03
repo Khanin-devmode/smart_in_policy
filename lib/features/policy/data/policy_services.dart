@@ -26,6 +26,16 @@ class PolicyService {
       await policiesCollection.add(policyMap);
     } catch (e) {}
   }
+
+  Future deletePolicy(Policy policy) async {
+    policiesCollection = _firestore.collection(cPolicies);
+    try {
+      await policiesCollection.doc(policy.id).delete();
+      // return true;
+    } catch (e) {
+      // return Future.error(e);
+    }
+  }
 }
 
 final clientPoliciesStreamProvider = StreamProvider<List<Policy>>((ref) async* {
