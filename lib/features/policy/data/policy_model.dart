@@ -51,17 +51,28 @@ final newClientFormProvider =
     StateProvider<NewPolicyForms>((ref) => NewPolicyForms());
 
 class NewPolicyForms {
-  TextEditingController number = TextEditingController();
-  TextEditingController name = TextEditingController();
-  TextEditingController company = TextEditingController();
-  TextEditingController startDay = TextEditingController();
-  TextEditingController startMonth = TextEditingController();
-  TextEditingController startYear = TextEditingController();
-  TextEditingController endDay = TextEditingController();
-  TextEditingController endMonth = TextEditingController();
-  TextEditingController endYear = TextEditingController();
-  TextEditingController coverage = TextEditingController();
-  TextEditingController cost = TextEditingController();
+  // TextEditingController number = TextEditingController();
+  // TextEditingController name = TextEditingController();
+  // TextEditingController company = TextEditingController();
+  // TextEditingController startDay = TextEditingController();
+  // TextEditingController startMonth = TextEditingController();
+  // TextEditingController startYear = TextEditingController();
+  // TextEditingController endDay = TextEditingController();
+  // TextEditingController endMonth = TextEditingController();
+  // TextEditingController endYear = TextEditingController();
+  // TextEditingController coverage = TextEditingController();
+  // TextEditingController cost = TextEditingController();
+  TextEditingController number = TextEditingController(text: 'T12345678');
+  TextEditingController name = TextEditingController(text: '90/5 ...');
+  TextEditingController company = TextEditingController(text: 'AIA');
+  TextEditingController startDay = TextEditingController(text: '01');
+  TextEditingController startMonth = TextEditingController(text: '01');
+  TextEditingController startYear = TextEditingController(text: '2511');
+  TextEditingController endDay = TextEditingController(text: '01');
+  TextEditingController endMonth = TextEditingController(text: '01');
+  TextEditingController endYear = TextEditingController(text: '2601');
+  TextEditingController coverage = TextEditingController(text: '11000000');
+  TextEditingController cost = TextEditingController(text: '11000');
 
   Policy toPolicyObj() {
     return Policy(
