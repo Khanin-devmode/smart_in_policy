@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smart_in_policy/features/policy/data/policy_services.dart';
 
-class PolicyDetailPage extends StatefulWidget {
+class PolicyDetailPage extends ConsumerStatefulWidget {
   const PolicyDetailPage({super.key});
 
   @override
-  State<PolicyDetailPage> createState() => _PolicyDetailPageState();
+  PolicyDetailPageState createState() => PolicyDetailPageState();
 }
 
-class _PolicyDetailPageState extends State<PolicyDetailPage> {
+class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
   @override
   Widget build(BuildContext context) {
+    final policy = ref.read(selectedPolicy);
+
     return Scaffold(
         appBar: AppBar(title: const Text('Policy detail')),
         body: Row(
           children: [
-            const Expanded(child: Text('policy')),
+            Expanded(child: Text(policy!.policyName)),
             // Expanded(
             //   child: GridView.count(
             //     primary: false,

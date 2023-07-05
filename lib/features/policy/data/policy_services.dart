@@ -7,6 +7,7 @@ import 'package:smart_in_policy/features/policy/data/policy_model.dart';
 import 'package:smart_in_policy/helper_functions.dart';
 
 final selectedClientProvider = StateProvider<Client?>((ref) => null);
+final selectedPolicy = StateProvider<Policy?>((ref) => null);
 
 final policyServiceProvider = Provider<PolicyService>((ref) {
   return PolicyService();

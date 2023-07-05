@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/data/client_model.dart';
 import 'package:smart_in_policy/features/policy/data/policy_services.dart';
 import 'package:smart_in_policy/features/policy/presentation/add_policy_dialog.dart';
@@ -56,6 +57,12 @@ class ClientPolicyPageState extends ConsumerState<ClientPolicyPage> {
                               });
                             },
                           ),
+                          onTap: () {
+                            ref
+                                .read(selectedPolicy.notifier)
+                                .update((state) => data[index]);
+                            Navigator.pushNamed(context, rPolicyDetail);
+                          },
                         );
                       },
                     );
