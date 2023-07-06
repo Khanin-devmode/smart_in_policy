@@ -15,8 +15,8 @@ class Policy {
   double policyCost;
   String? id;
   String? clientId;
-  List<Protection> protections = [];
-  List<CashIncome> cashIncomes = [];
+  List<Map<int, int>> protections = [];
+  List<CashBenefits> cashIncomes = [];
 
   Map<String, dynamic> toCollectionObj() {
     return {
@@ -39,8 +39,8 @@ class Protection {
   double protectionAmount;
 }
 
-class CashIncome {
-  CashIncome(this.name, this.cashDueMonths, this.cashAmount);
+class CashBenefits {
+  CashBenefits(this.name, this.cashDueMonths, this.cashAmount);
 
   String name;
   List<int> cashDueMonths;
