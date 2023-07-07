@@ -1,5 +1,5 @@
 class UserConfig {
-  UserConfig(this.allInputTypes);
+  UserConfig(this.inputTypes);
 
-  Map<String, String> allInputTypes;
+  Map<int, String> inputTypes;
 }
