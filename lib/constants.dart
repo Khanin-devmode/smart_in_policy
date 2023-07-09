@@ -6,4 +6,4 @@ const rPolicyDetail = '/policy-detail';
 //Firestore collection constants.
 const cPolicies = 'Policies';
 const cClients = 'Clients';
-const cUserConfig = 'UserConfig';
+const cUserConfig = 'Users';

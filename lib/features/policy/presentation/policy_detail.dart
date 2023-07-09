@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smart_in_policy/features/core/data/user_model.dart';
+import 'package:smart_in_policy/features/core/data/user_service.dart';
 import 'package:smart_in_policy/features/policy/data/policy_services.dart';
 
 class PolicyDetailPage extends ConsumerStatefulWidget {
@@ -14,11 +16,26 @@ class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
   Widget build(BuildContext context) {
     final policy = ref.read(selectedPolicy);
 
+    final userConfig = ref.read(userConfigStreamProvider);
+
     return Scaffold(
         appBar: AppBar(title: const Text('Policy detail')),
         body: Row(
           children: [
-            Expanded(child: Text(policy!.policyName)),
+            Expanded(
+              child: Column(
+                children: [
+                  Text(policy!.policyName),
+                  Container(
+                      child: userConfig.when(
+                          data: (data) {
+                            print('data obtained');
+                          },
+                          error: (error, stackTrace) => Text(error.toString()),
+                          loading: () => Text('loading')))
+                ],
+              ),
+            ),
             // Expanded(
             //   child: GridView.count(
             //     primary: false,
