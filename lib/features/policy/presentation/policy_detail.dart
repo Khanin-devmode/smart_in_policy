@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:smart_in_policy/features/core/data/user_model.dart';
 import 'package:smart_in_policy/features/core/data/user_service.dart';
 import 'package:smart_in_policy/features/policy/data/policy_services.dart';
 
@@ -29,7 +28,7 @@ class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
                   Container(
                       child: userConfig.when(
                           data: (data) {
-                            print('data obtained');
+                            return Text('data obtained');
                           },
                           error: (error, stackTrace) => Text(error.toString()),
                           loading: () => Text('loading')))

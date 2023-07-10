@@ -22,7 +22,7 @@ class ClientService {
     try {
       await clientsCollection.add(clientMap);
     } catch (e) {
-      print(e);
+      // print(e);
     }
   }
 

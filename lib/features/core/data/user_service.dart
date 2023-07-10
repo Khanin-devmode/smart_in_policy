@@ -3,39 +3,45 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_in_policy/constants.dart';
 import 'user_model.dart';
 
-final userConfig = StateProvider<UserConfig?>((ref) => null);
+// final userConfig = StateProvider<UserConfig?>((ref) => null);
 
-class UserService {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+// class UserService {
+//   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  late CollectionReference userConfigCollection;
+//   late CollectionReference userConfigCollection;
 
-  void loadUserConfig(String userId) async {
-    userConfigCollection = _firestore.collection(cUserConfig);
+//   void loadUserConfig(String userId) async {
+//     userConfigCollection = _firestore.collection(cUserConfig);
 
-    await userConfigCollection.doc().get().then((value) {
-      print(value);
-    });
-  }
-}
+//     await userConfigCollection.doc().get().then((value) {
+//       print(value);
+//     });
+//   }
+// }
 
 final userConfigStreamProvider = StreamProvider<UserConfig>((ref) async* {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  // var clientPolicy = const <Policy>[];
-  // Client? selctedClient = ref.watch(selectedClientProvider);
-  print('working in service');
   await for (var snapshot in firestore
       .collection(cUserConfig)
       .doc('AEIHFYFyZIyB76nKAbQc') //temp, actual is user id from auth.
       .snapshots()) {
     if (snapshot.exists) {
-      print('printing user config in realtime');
-      print(snapshot.data());
-    } else {
-      print('snapshot not found');
-      yield UserConfig({001: 'ความคุ้มครองประกันชีิวิต'});
+      Map tempInputTypes = snapshot.get('inputTypes');
+
+      Map<int, String> inputTypes = {};
+      tempInputTypes.forEach((key, value) {
+        final entry = <int, String>{int.parse(key): value.toString()};
+        inputTypes.addAll(entry);
+      });
+
+      yield UserConfig(inputTypes);
+
+      print(inputTypes['001']);
+      // yield UserConfig(inputTypes);
     }
+
+    // yield UserConfig({001: 'ความคุ้มครองประกันชีิวิต'});
   }
 
   //   if (snapshot.docs.isNotEmpty) {

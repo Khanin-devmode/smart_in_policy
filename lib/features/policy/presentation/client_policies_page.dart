@@ -22,7 +22,6 @@ class ClientPolicyPageState extends ConsumerState<ClientPolicyPage> {
     // }
     final clientPolicies = ref.watch(clientPoliciesStreamProvider);
     final policyService = ref.watch(policyServiceProvider);
-    print(clientPolicies);
 
     return Scaffold(
         appBar: AppBar(
