@@ -35,9 +35,10 @@ final userConfigStreamProvider = StreamProvider<UserConfig>((ref) async* {
         inputTypes.addAll(entry);
       });
 
+      print(inputTypes);
+
       yield UserConfig(inputTypes);
 
-      print(inputTypes['001']);
       // yield UserConfig(inputTypes);
     }
 

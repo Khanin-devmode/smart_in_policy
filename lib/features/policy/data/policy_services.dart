@@ -56,14 +56,17 @@ final clientPoliciesStreamProvider = StreamProvider<List<Policy>>((ref) async* {
         DateTime startDate = toDateTime(clientPolicyDoc.get('startDate'));
         DateTime endDate = toDateTime(clientPolicyDoc.get('endDate'));
 
+        int policyCoverage = clientPolicyDoc.get('policyCoverage');
+        int policyCost = clientPolicyDoc.get('policyCost');
+
         Policy policy = Policy(
           clientPolicyDoc.get('policyNumber'),
           clientPolicyDoc.get('policyName'),
           clientPolicyDoc.get('policyCompany'),
           startDate,
           endDate,
-          clientPolicyDoc.get('policyCoverage'),
-          clientPolicyDoc.get('policyCost'),
+          policyCoverage.toDouble(),
+          policyCost.toDouble(),
           clientPolicyDoc.id,
           clientPolicyDoc.get('clientId'),
         );
