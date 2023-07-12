@@ -56,17 +56,17 @@ final clientPoliciesStreamProvider = StreamProvider<List<Policy>>((ref) async* {
         DateTime startDate = toDateTime(clientPolicyDoc.get('startDate'));
         DateTime endDate = toDateTime(clientPolicyDoc.get('endDate'));
 
-        int policyCoverage = clientPolicyDoc.get('policyCoverage');
-        int policyCost = clientPolicyDoc.get('policyCost');
-
         Policy policy = Policy(
           clientPolicyDoc.get('policyNumber'),
           clientPolicyDoc.get('policyName'),
           clientPolicyDoc.get('policyCompany'),
           startDate,
           endDate,
-          policyCoverage.toDouble(),
-          policyCost.toDouble(),
+          /*.get will return either int or double depends on what store on 
+           firestore. to make it always a double we reverse either to string 
+           first and parse to double. */
+          double.parse(clientPolicyDoc.get('policyCoverage').toString()),
+          double.parse(clientPolicyDoc.get('policyCost').toString()),
           clientPolicyDoc.id,
           clientPolicyDoc.get('clientId'),
         );
