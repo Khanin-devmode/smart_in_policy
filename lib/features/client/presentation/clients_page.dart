@@ -19,7 +19,6 @@ class ClientsPageState extends ConsumerState<ClientsPage> {
   Widget build(BuildContext context) {
     final allClient = ref.watch(clientsProvider);
     final clientService = ref.watch(clientServiceProvider);
-    final userConfig = ref.watch(userConfigStreamProvider);
 
     return Scaffold(
       appBar: AppBar(

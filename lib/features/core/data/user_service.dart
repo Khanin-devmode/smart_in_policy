@@ -26,47 +26,16 @@ final userConfigStreamProvider = StreamProvider<UserConfig>((ref) async* {
       .collection(cUserConfig)
       .doc('AEIHFYFyZIyB76nKAbQc') //temp, actual is user id from auth.
       .snapshots()) {
+    Map<int, String> inputTypes = {};
     if (snapshot.exists) {
       Map tempInputTypes = snapshot.get('inputTypes');
-
-      Map<int, String> inputTypes = {};
       tempInputTypes.forEach((key, value) {
         final entry = <int, String>{int.parse(key): value.toString()};
         inputTypes.addAll(entry);
       });
-
-      print(inputTypes);
-
-      yield UserConfig(inputTypes);
-
-      // yield UserConfig(inputTypes);
     }
 
-    // yield UserConfig({001: 'ความคุ้มครองประกันชีิวิต'});
+    print('service update:' + inputTypes.toString());
+    yield UserConfig(inputTypes);
   }
-
-  //   if (snapshot.docs.isNotEmpty) {
-  //     for (DocumentSnapshot clientPolicyDoc in snapshot.docs) {
-  //       DateTime startDate = toDateTime(clientPolicyDoc.get('startDate'));
-  //       DateTime endDate = toDateTime(clientPolicyDoc.get('endDate'));
-
-  //       Policy policy = Policy(
-  //         clientPolicyDoc.get('policyNumber'),
-  //         clientPolicyDoc.get('policyName'),
-  //         clientPolicyDoc.get('policyCompany'),
-  //         startDate,
-  //         endDate,
-  //         clientPolicyDoc.get('policyCoverage'),
-  //         clientPolicyDoc.get('policyCost'),
-  //         clientPolicyDoc.id,
-  //         clientPolicyDoc.get('clientId'),
-  //       );
-
-  //       clientPolicy = [...clientPolicy, policy];
-  //       yield clientPolicy;
-  //     }
-  //   } else {
-  //     yield clientPolicy;
-  //   }
-  // }
 });
