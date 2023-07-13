@@ -27,6 +27,7 @@ final userConfigStreamProvider = StreamProvider<UserConfig>((ref) async* {
       .doc('AEIHFYFyZIyB76nKAbQc') //temp, actual is user id from auth.
       .snapshots()) {
     Map<int, String> inputTypes = {};
+
     if (snapshot.exists) {
       Map tempInputTypes = snapshot.get('inputTypes');
       tempInputTypes.forEach((key, value) {
@@ -34,8 +35,7 @@ final userConfigStreamProvider = StreamProvider<UserConfig>((ref) async* {
         inputTypes.addAll(entry);
       });
     }
-
-    print('service update:' + inputTypes.toString());
+    print('from service: ' + inputTypes.toString());
     yield UserConfig(inputTypes);
   }
 });

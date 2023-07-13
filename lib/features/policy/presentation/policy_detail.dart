@@ -13,15 +13,16 @@ class PolicyDetailPage extends ConsumerStatefulWidget {
 class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
   @override
   Widget build(BuildContext context) {
-    final policy = ref.read(selectedPolicy);
+    final policy = ref.watch(selectedPolicy);
 
-    final userConfig = ref.read(userConfigStreamProvider);
+    final userConfig = ref.watch(userConfigStreamProvider);
 
     return Scaffold(
         appBar: AppBar(title: const Text('Policy detail')),
         body: userConfig.when(
-            data: (data) {
-              return Text('data loaded');
+            data: (userConfig) {
+              print('widget build: ' + userConfig.inputTypes.toString());
+              return Text('Data Loaded: ' + userConfig.inputTypes.toString());
             },
             error: (error, stackTrace) => Text(error.toString()),
             loading: (() => Text('loading...'))));
