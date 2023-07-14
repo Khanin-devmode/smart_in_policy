@@ -22,7 +22,34 @@ class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
         body: userConfig.when(
             data: (userConfig) {
               print('widget build: ' + userConfig.inputTypes.toString());
-              return Text('Data Loaded: ' + userConfig.inputTypes.toString());
+
+              List<String> inputTypes = userConfig.inputTypes.values.toList();
+
+              // return Text('Data Loaded: ' + userConfig.inputTypes.toString());
+
+              if (inputTypes.isNotEmpty) {
+                return DropdownButton(
+                  value: inputTypes.first,
+                  items: inputTypes
+                      .map(
+                        (value) => DropdownMenuItem(
+                          value: value,
+                          child: Text(value),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    print(value);
+                  },
+                );
+              } else {
+                return Text('Field is empty');
+              }
+
+              // return Column(
+              //   children: List.generate(
+              //       inputTypes.length, (index) => Text(inputTypes[index])),
+              // );
             },
             error: (error, stackTrace) => Text(error.toString()),
             loading: (() => Text('loading...'))));
