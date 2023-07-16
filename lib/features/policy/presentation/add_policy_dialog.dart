@@ -66,7 +66,7 @@ class AddPolicyDialog extends ConsumerWidget {
                 return null;
               },
             ),
-            Text('วันที่เริ่มสัญญา'),
+            const Text('วันที่เริ่มสัญญา'),
             Row(
               children: [
                 Expanded(
@@ -137,7 +137,7 @@ class AddPolicyDialog extends ConsumerWidget {
                 ),
               ],
             ),
-            Text('วันสิ้นสุดสัญญา'),
+            const Text('วันสิ้นสุดสัญญา'),
             Row(
               children: [
                 Expanded(

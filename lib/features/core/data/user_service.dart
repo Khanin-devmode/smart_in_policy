@@ -35,7 +35,7 @@ final userConfigStreamProvider = StreamProvider<UserConfig>((ref) async* {
         inputTypes.addAll(entry);
       });
     }
-    print('from service: ' + inputTypes.toString());
+    print('from service: $inputTypes');
     yield UserConfig(inputTypes);
   }
 });

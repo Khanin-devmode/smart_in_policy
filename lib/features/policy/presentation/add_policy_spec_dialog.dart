@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_in_policy/features/core/data/user_service.dart';
-import 'package:smart_in_policy/features/policy/data/policy_model.dart';
 import 'package:smart_in_policy/features/policy/data/policy_services.dart';
 
 Future<void> newPolicySpecDialogBuilder(BuildContext context) {
@@ -30,11 +28,9 @@ class AddPolicyDialog extends ConsumerWidget {
           children: [
             userConfig.when(
               data: (userConfig) {
-                print('widget build: ' + userConfig.inputTypes.toString());
+                print('widget build: ${userConfig.inputTypes}');
 
                 List<String> inputTypes = userConfig.inputTypes.values.toList();
-
-                // return Text('Data Loaded: ' + userConfig.inputTypes.toString());
 
                 if (inputTypes.isNotEmpty) {
                   return DropdownButton(
@@ -52,11 +48,11 @@ class AddPolicyDialog extends ConsumerWidget {
                     },
                   );
                 } else {
-                  return Text('Field is empty');
+                  return const Text('Field is empty');
                 }
               },
               error: (error, stackTrace) => Text(error.toString()),
-              loading: (() => Text('loading...')),
+              loading: (() => const Text('loading...')),
             ),
           ],
         ),

@@ -49,7 +49,7 @@ class ClientPolicyPageState extends ConsumerState<ClientPolicyPage> {
                         return ListTile(
                           title: Text(data[index].policyName),
                           trailing: IconButton(
-                            icon: Icon(Icons.remove),
+                            icon: const Icon(Icons.remove),
                             onPressed: () {
                               removePolicyDialogBuilder(context, () {
                                 policyService.deletePolicy(data[index]);

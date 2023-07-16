@@ -49,7 +49,7 @@ class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
               child: SingleChildScrollView(
                   child: Column(
             children: [
-              Text('Grid Header 1'),
+              const Text('Grid Header 1'),
               Wrap(
                 spacing: 8.0, // gap between adjacent chips
                 runSpacing: 4.0, // gap between lines
@@ -103,7 +103,7 @@ class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
                   ),
                 ],
               ),
-              Text('Grid Header 1'),
+              const Text('Grid Header 1'),
               Wrap(
                 spacing: 8.0, // gap between adjacent chips
                 runSpacing: 4.0, // gap between lines
