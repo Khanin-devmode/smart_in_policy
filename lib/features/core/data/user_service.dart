@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 import 'package:smart_in_policy/constants.dart';
 import 'user_model.dart';
 
@@ -22,6 +23,8 @@ import 'user_model.dart';
 final userConfigStreamProvider = StreamProvider<UserConfig>((ref) async* {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  final log = Logger('User Service');
+
   await for (var snapshot in firestore
       .collection(cUserConfig)
       .doc('AEIHFYFyZIyB76nKAbQc') //temp, actual is user id from auth.
@@ -35,7 +38,8 @@ final userConfigStreamProvider = StreamProvider<UserConfig>((ref) async* {
         inputTypes.addAll(entry);
       });
     }
-    print('from service: $inputTypes');
+    log.info(inputTypes.toString());
+    // print('from service: $inputTypes');
     yield UserConfig(inputTypes);
   }
 });

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/data/client_model.dart';
 import 'package:smart_in_policy/features/policy/data/policy_model.dart';
@@ -18,6 +19,8 @@ class PolicyService {
 
   late CollectionReference policiesCollection;
 
+  final log = Logger('Policy Service');
+
   Future addPolicy(Policy newPolicy, Client? client) async {
     Map<String, dynamic> policyMap = newPolicy.toCollectionObj();
     policyMap['clientId'] = client!.id;
@@ -25,7 +28,9 @@ class PolicyService {
 
     try {
       await policiesCollection.add(policyMap);
-    } catch (e) {}
+    } catch (e) {
+      log.warning(e);
+    }
   }
 
   Future deletePolicy(Policy policy) async {

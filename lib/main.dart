@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/presentation/clients_page.dart';
 import 'package:smart_in_policy/features/policy/presentation/policy_detail_page.dart';
@@ -15,11 +16,17 @@ Future main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const ProviderScope(child: MyApp()));
+  Logger.root.level = Level.ALL; // defaults to Level.INFO
+  Logger.root.onRecord.listen((record) {
+    print(
+        '${record.level.name}: @${record.loggerName} ${record.time}: ${record.message}');
+  });
+
+  runApp(const ProviderScope(child: SmartInPolicyApp()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class SmartInPolicyApp extends StatelessWidget {
+  const SmartInPolicyApp({super.key});
 
   @override
   Widget build(BuildContext context) {

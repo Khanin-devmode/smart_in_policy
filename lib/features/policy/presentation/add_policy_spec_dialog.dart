@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 import 'package:smart_in_policy/features/core/data/user_service.dart';
 import 'package:smart_in_policy/features/policy/data/policy_services.dart';
 
@@ -19,6 +20,7 @@ class AddPolicyDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final newPolicyFormKey = ref.watch(newPolicyFormKeyProvider);
     final userConfig = ref.watch(userConfigStreamProvider);
+    final log = Logger('Add Policy Dialog');
 
     return AlertDialog(
       title: const Text('New Policy Form'),
@@ -28,7 +30,7 @@ class AddPolicyDialog extends ConsumerWidget {
           children: [
             userConfig.when(
               data: (userConfig) {
-                print('widget build: ${userConfig.inputTypes}');
+                log.info('widget build: ${userConfig.inputTypes.toString()}');
 
                 List<String> inputTypes = userConfig.inputTypes.values.toList();
 
@@ -43,9 +45,7 @@ class AddPolicyDialog extends ConsumerWidget {
                           ),
                         )
                         .toList(),
-                    onChanged: (value) {
-                      print(value);
-                    },
+                    onChanged: (value) {},
                   );
                 } else {
                   return const Text('Field is empty');
