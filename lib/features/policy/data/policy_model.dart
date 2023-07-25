@@ -2,9 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Policy {
-  Policy(this.policyNumber, this.policyName, this.policyCompany, this.startDate,
-      this.endDate, this.policyCoverage, this.policyCost,
-      [this.id, this.clientId]);
+  // Policy(this.policyNumber, this.policyName, this.policyCompany, this.startDate,
+  //     this.endDate, this.policyCoverage, this.policyCost,
+  //     [this.id, this.clientId]);
+  Policy(
+      {required this.policyNumber,
+      required this.policyName,
+      required this.policyCompany,
+      required this.startDate,
+      required this.endDate,
+      required this.policyCoverage,
+      required this.policyCost,
+      this.id,
+      this.clientId});
 
   String policyNumber;
   String policyName;
@@ -76,18 +86,15 @@ class NewPolicyForms {
 
   Policy toPolicyObj() {
     return Policy(
-      number.text,
-      name.text,
-      company.text,
-
-      DateTime.utc(int.parse(startYear.text) - 543, int.parse(startMonth.text),
-          int.parse(startDay.text)), //startDate
-      DateTime.utc(int.parse(endYear.text) - 543, int.parse(endMonth.text),
-          int.parse(endDay.text)),
-      //endDate
-
-      double.parse(coverage.text),
-      double.parse(cost.text),
+      policyNumber: number.text,
+      policyName: name.text,
+      policyCompany: company.text,
+      startDate: DateTime.utc(int.parse(startYear.text) - 543,
+          int.parse(startMonth.text), int.parse(startDay.text)),
+      endDate: DateTime.utc(int.parse(endYear.text) - 543,
+          int.parse(endMonth.text), int.parse(endDay.text)),
+      policyCoverage: double.parse(coverage.text),
+      policyCost: double.parse(cost.text),
     );
   }
 }
