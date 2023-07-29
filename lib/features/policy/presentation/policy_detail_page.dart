@@ -15,18 +15,6 @@ class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
   Widget build(BuildContext context) {
     final policy = ref.watch(selectedPolicy);
 
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: const Text('Policy detail'),
-    //     actions: [
-    //       IconButton(
-    //           onPressed: () => newPolicySpecDialogBuilder(context),
-    //           icon: const Icon(Icons.add))
-    //     ],
-    //   ),
-
-    // );
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Policy detail'),

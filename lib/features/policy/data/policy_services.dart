@@ -88,6 +88,6 @@ final clientPoliciesStreamProvider = StreamProvider<List<Policy>>((ref) async* {
 });
 
 final newPolicyFormProvider =
-    StateProvider<NewPolicyForms>((ref) => NewPolicyForms());
+    StateProvider<NewPolicyForms>((ref) => NewPolicyForms.temp());
 
 final newPolicyFormKeyProvider = StateProvider((ref) => GlobalKey<FormState>());
