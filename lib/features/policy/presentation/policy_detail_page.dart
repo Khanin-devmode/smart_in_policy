@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smart_in_policy/common/ui/common_app_bar.dart';
 import 'package:smart_in_policy/features/policy/data/policy_services.dart';
 import 'package:smart_in_policy/features/policy/presentation/add_policy_spec_dialog.dart';
 
@@ -16,8 +17,8 @@ class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
     final policy = ref.watch(selectedPolicy);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Policy detail'),
+      appBar: CommonAppBar(
+        title: 'Policy Detail',
         actions: [
           IconButton(
               onPressed: () => newPolicySpecDialogBuilder(context),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smart_in_policy/common/ui/common_app_bar.dart';
 import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/data/client_model.dart';
 import 'package:smart_in_policy/features/policy/data/policy_services.dart';
@@ -24,9 +25,8 @@ class ClientPolicyPageState extends ConsumerState<ClientPolicyPage> {
     final policyService = ref.watch(policyServiceProvider);
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: const Text('User Insurance Policies'),
+        appBar: CommonAppBar(
+          title: 'User insurance policies',
           actions: [
             IconButton(
               onPressed: () => newPolicyDialogBuilder(context),

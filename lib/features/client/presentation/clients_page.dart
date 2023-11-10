@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smart_in_policy/common/ui/common_app_bar.dart';
 import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/data/client_services.dart';
 import 'package:smart_in_policy/features/client/presentation/add_client_dialog.dart';
@@ -18,15 +19,10 @@ class ClientsPageState extends ConsumerState<ClientsPage> {
   Widget build(BuildContext context) {
     final allClient = ref.watch(clientsProvider);
     final clientService = ref.watch(clientServiceProvider);
-    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text(
-          'Clients',
-          style: TextStyle(color: colorScheme.onPrimary),
-        ),
+      appBar: CommonAppBar(
+        title: 'Clients',
         actions: [
           IconButton(
               onPressed: () => newClientDialogBuilder(context),
