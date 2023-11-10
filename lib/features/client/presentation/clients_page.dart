@@ -18,11 +18,15 @@ class ClientsPageState extends ConsumerState<ClientsPage> {
   Widget build(BuildContext context) {
     final allClient = ref.watch(clientsProvider);
     final clientService = ref.watch(clientServiceProvider);
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Clients'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Text(
+          'Clients',
+          style: TextStyle(color: colorScheme.onPrimary),
+        ),
         actions: [
           IconButton(
               onPressed: () => newClientDialogBuilder(context),
