@@ -5,16 +5,17 @@ class Policy {
   // Policy(this.policyNumber, this.policyName, this.policyCompany, this.startDate,
   //     this.endDate, this.policyCoverage, this.policyCost,
   //     [this.id, this.clientId]);
-  Policy(
-      {required this.policyNumber,
-      required this.policyName,
-      required this.policyCompany,
-      required this.startDate,
-      required this.endDate,
-      required this.policyCoverage,
-      required this.policyCost,
-      this.id,
-      this.clientId});
+  Policy({
+    required this.policyNumber,
+    required this.policyName,
+    required this.policyCompany,
+    required this.startDate,
+    required this.endDate,
+    required this.policyCoverage,
+    required this.policyCost,
+    this.id,
+    this.clientId,
+  });
 
   String policyNumber;
   String policyName;
