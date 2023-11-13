@@ -100,9 +100,20 @@ class AddPolicyDialog extends ConsumerWidget {
                   FilteringTextInputFormatter.digitsOnly,
                   ThaiBahtInputFormatter(),
                 ],
-                decoration: InputDecoration(
-                  labelText: 'Thai Baht',
-                  prefixIcon: Icon(Icons.attach_money),
+                decoration: const InputDecoration(
+                  labelText: 'จำนวนเงิน',
+                  // prefixIcon: Icon(Icons.attach_money),
+                ),
+              ),
+              TextFormField(
+                controller: _controller,
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                decoration: const InputDecoration(
+                  labelText: 'ทุกๆ',
+                  // prefixIcon: Icon(Icons.attach_money),
                 ),
               ),
             ],
