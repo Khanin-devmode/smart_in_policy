@@ -11,10 +11,10 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return AppBar(
+      foregroundColor: colorScheme.onPrimary,
       backgroundColor: Theme.of(context).colorScheme.primary,
       title: Text(
         title,
-        style: TextStyle(color: colorScheme.onPrimary),
       ),
       actions: actions,
     );

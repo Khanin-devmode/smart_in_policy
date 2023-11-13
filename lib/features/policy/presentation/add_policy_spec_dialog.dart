@@ -21,10 +21,17 @@ class AddPolicyDialog extends ConsumerWidget {
     final newPolicyFormKey = ref.watch(newPolicyFormKeyProvider);
     final userConfig = ref.watch(userConfigStreamProvider);
     final selectedInputTypeCode = ref.watch(selectedInputTypeCodeProvider);
-    final log = Logger('Add Policy Dialog');
+    final selectedSpecPeriodType = ref.watch(selectedSpecPeriodTypeProvider);
+    final log = Logger('New Policy Spec Form');
+
+    // final specPeriods = <String, String>{
+    //   'aa': 'แบบประจำทุกเดือน/ปี',
+    //   'ab': 'กำหนดเอง',
+    //   'ac': 'แบบครั้งเดียว',
+    // };
 
     return AlertDialog(
-      title: const Text('New Policy Form'),
+      title: const Text('New Policy Spec'),
       content: Form(
         key: newPolicyFormKey,
         child: Column(
@@ -64,6 +71,21 @@ class AddPolicyDialog extends ConsumerWidget {
               },
               error: (error, stackTrace) => Text(error.toString()),
               loading: (() => const Text('loading...')),
+            ),
+            DropdownButton(
+              value: selectedSpecPeriodType,
+              items: kSpecPeriodTypes.keys
+                  .map((e) => DropdownMenuItem(
+                        value: e,
+                        child: Text(kSpecPeriodTypes[e]!),
+                      ))
+                  .toList(),
+              onChanged: (value) {
+                // log.info(value);
+                ref
+                    .read(selectedSpecPeriodTypeProvider.notifier)
+                    .update((state) => value as String);
+              },
             ),
           ],
         ),

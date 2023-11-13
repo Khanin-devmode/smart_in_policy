@@ -45,3 +45,13 @@ final userConfigStreamProvider = StreamProvider<UserConfig>((ref) async* {
 });
 
 final selectedInputTypeCodeProvider = StateProvider<int?>((ref) => null);
+
+final selectedSpecPeriodTypeProvider = StateProvider<String>(
+  (ref) => 'aa',
+);
+
+final kSpecPeriodTypes = <String, String>{
+  'aa': 'แบบประจำทุกเดือน/ปี',
+  'ab': 'กำหนดเอง',
+  'ac': 'แบบครั้งเดียว',
+};
