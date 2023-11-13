@@ -27,7 +27,7 @@ final userConfigStreamProvider = StreamProvider<UserConfig>((ref) async* {
 
   await for (var snapshot in firestore
       .collection(cUserConfig)
-      .doc('AEIHFYFyZIyB76nKAbQc') //temp, actual is user id from auth.
+      .doc('AEIHFYFyZIyB76nKAbQc') //TODO temp, actual is user id from auth.
       .snapshots()) {
     Map<int, String> inputTypes = {};
 
@@ -43,3 +43,5 @@ final userConfigStreamProvider = StreamProvider<UserConfig>((ref) async* {
     yield UserConfig(inputTypes);
   }
 });
+
+final selectedInputTypeCodeProvider = StateProvider<int?>((ref) => null);

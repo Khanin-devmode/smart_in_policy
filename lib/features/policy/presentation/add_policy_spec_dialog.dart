@@ -20,6 +20,7 @@ class AddPolicyDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final newPolicyFormKey = ref.watch(newPolicyFormKeyProvider);
     final userConfig = ref.watch(userConfigStreamProvider);
+    final selectedInputTypeCode = ref.watch(selectedInputTypeCodeProvider);
     final log = Logger('Add Policy Dialog');
 
     return AlertDialog(
@@ -32,20 +33,30 @@ class AddPolicyDialog extends ConsumerWidget {
               data: (userConfig) {
                 log.info('widget build: ${userConfig.inputTypes.toString()}');
 
-                List<String> inputTypes = userConfig.inputTypes.values.toList();
+                List<int> inputTypesCode = userConfig.inputTypes.keys.toList();
 
-                if (inputTypes.isNotEmpty) {
-                  return DropdownButton(
-                    value: inputTypes.first,
-                    items: inputTypes
+                if (inputTypesCode.isNotEmpty) {
+                  // ref
+                  //     .read(selectedInputTypeCodeProvider.notifier)
+                  //     .update((state) => inputTypesCode.first);
+
+                  return DropdownButton<int>(
+                    hint: Text('เลือกประเภท'),
+                    value: selectedInputTypeCode,
+                    items: inputTypesCode
                         .map(
                           (value) => DropdownMenuItem(
                             value: value,
-                            child: Text(value),
+                            child: Text(userConfig.inputTypes[value]!),
                           ),
                         )
                         .toList(),
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      print(value);
+                      ref
+                          .read(selectedInputTypeCodeProvider.notifier)
+                          .update((state) => value);
+                    },
                   );
                 } else {
                   return const Text('Field is empty');
