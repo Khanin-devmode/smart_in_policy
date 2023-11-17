@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
 class PolicySpec {
-  PolicySpec(
-      {required this.policySpecCode, required this.policySpecPeriodCode});
+  PolicySpec({
+    required this.specCode,
+    required this.specPeriodCode,
+    this.aaAmount,
+    this.aaMonthPeriod,
+    this.aaPaymentCount,
+  });
 
-  final int policySpecCode; //e.g. 001, 002, 003
-  final String policySpecPeriodCode; //e.g.  aa, ab, ac
+  final int specCode; //e.g. 001, 002, 003
+  final String specPeriodCode; //e.g.  aa, ab, ac
   double? aaAmount;
   int? aaMonthPeriod;
   int? aaPaymentCount;
@@ -28,4 +33,12 @@ class NewSpecForm {
   TextEditingController aaAmount;
   TextEditingController aaMonthPeriod;
   TextEditingController aaPaymentCount;
+
+  PolicySpec toPolicySpecObj(
+      {required int specCode, required String specPeriodCode}) {
+    return PolicySpec(
+      specCode: specCode,
+      specPeriodCode: specPeriodCode,
+    );
+  }
 }

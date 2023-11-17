@@ -150,7 +150,17 @@ class AddPolicyDialog extends ConsumerWidget {
             textStyle: Theme.of(context).textTheme.labelLarge,
           ),
           child: const Text('Add'),
-          onPressed: () {},
+          onPressed: () {
+            final newSpec = newSpecForm.toPolicySpecObj(
+                specCode: selectedInputTypeCode as int,
+                specPeriodCode: selectedSpecPeriodType);
+
+            print(newSpec.specCode);
+            print(newSpec.specPeriodCode);
+            print(newSpec.aaAmount);
+            print(newSpec.aaMonthPeriod);
+            print(newSpec.aaPaymentCount);
+          },
         ),
       ],
     );
