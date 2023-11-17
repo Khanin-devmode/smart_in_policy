@@ -5,10 +5,18 @@ import 'package:logging/logging.dart';
 import 'package:smart_in_policy/constants.dart';
 import 'package:smart_in_policy/features/client/data/client_model.dart';
 import 'package:smart_in_policy/features/policy/data/policy_model.dart';
+import 'package:smart_in_policy/features/policy/data/policy_spec_model.dart';
 import 'package:smart_in_policy/helper_functions.dart';
 
 final selectedClientProvider = StateProvider<Client?>((ref) => null);
 final selectedPolicy = StateProvider<Policy?>((ref) => null);
+
+final newPolicyFormProvider =
+    StateProvider<NewPolicyForms>((ref) => NewPolicyForms.temp());
+final newPolicyFormKeyProvider = StateProvider((ref) => GlobalKey<FormState>());
+
+final newSpecFormProvider = StateProvider<NewSpecForm>((ref) => NewSpecForm());
+final newSpecFormKeyProvider = StateProvider((ref) => GlobalKey<FormState>());
 
 final policyServiceProvider = Provider<PolicyService>((ref) {
   return PolicyService();
@@ -86,8 +94,3 @@ final clientPoliciesStreamProvider = StreamProvider<List<Policy>>((ref) async* {
     }
   }
 });
-
-final newPolicyFormProvider =
-    StateProvider<NewPolicyForms>((ref) => NewPolicyForms.temp());
-
-final newPolicyFormKeyProvider = StateProvider((ref) => GlobalKey<FormState>());

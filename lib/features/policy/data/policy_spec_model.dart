@@ -19,8 +19,8 @@ class PolicySpec {
   }
 }
 
-class NewPolicySpecForm {
-  NewPolicySpecForm()
+class NewSpecForm {
+  NewSpecForm()
       : aaAmount = TextEditingController(),
         aaMonthPeriod = TextEditingController(),
         aaPaymentCount = TextEditingController();

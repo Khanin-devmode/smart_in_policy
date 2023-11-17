@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:smart_in_policy/features/core/data/user_service.dart';
 import 'package:smart_in_policy/features/policy/data/policy_services.dart';
+import 'package:smart_in_policy/features/policy/data/policy_spec_model.dart';
 
 Future<void> newPolicySpecDialogBuilder(BuildContext context) {
   return showDialog<void>(
@@ -19,13 +20,18 @@ class AddPolicyDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final newPolicyFormKey = ref.watch(newPolicyFormKeyProvider);
-    final userConfig = ref.watch(userConfigStreamProvider);
+    //Selected Input
     final selectedInputTypeCode = ref.watch(selectedInputTypeCodeProvider);
     final selectedSpecPeriodType = ref.watch(selectedSpecPeriodTypeProvider);
-    final log = Logger('New Policy Spec Form');
 
-    final TextEditingController _controller = TextEditingController();
+    //User config
+    final userConfig = ref.watch(userConfigStreamProvider);
+
+    //Forms
+    final newSpecFormKey = ref.watch(newSpecFormKeyProvider);
+    final newSpecForm = ref.watch(newSpecFormProvider);
+
+    final log = Logger('New Policy Spec Form');
 
     // final specPeriods = <String, String>{
     //   'aa': 'แบบประจำทุกเดือน/ปี',
@@ -37,7 +43,7 @@ class AddPolicyDialog extends ConsumerWidget {
       title: const Text('New Policy Spec'),
       content: SingleChildScrollView(
         child: Form(
-          key: newPolicyFormKey,
+          key: newSpecFormKey,
           child: Column(
             children: [
               userConfig.when(
@@ -94,7 +100,7 @@ class AddPolicyDialog extends ConsumerWidget {
               ),
               const Divider(),
               TextFormField(
-                controller: _controller,
+                controller: newSpecForm.aaAmount,
                 keyboardType: TextInputType.number,
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
@@ -106,7 +112,7 @@ class AddPolicyDialog extends ConsumerWidget {
                 ),
               ),
               TextFormField(
-                controller: _controller,
+                controller: newSpecForm.aaMonthPeriod,
                 keyboardType: TextInputType.number,
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
@@ -117,7 +123,7 @@ class AddPolicyDialog extends ConsumerWidget {
                 ),
               ),
               TextFormField(
-                controller: _controller,
+                controller: newSpecForm.aaPaymentCount,
                 keyboardType: TextInputType.number,
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,

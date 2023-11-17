@@ -58,9 +58,6 @@ class CashBenefits {
   double cashAmount;
 }
 
-final newClientFormProvider =
-    StateProvider<NewPolicyForms>((ref) => NewPolicyForms());
-
 class NewPolicyForms {
   NewPolicyForms()
       : number = TextEditingController(),
