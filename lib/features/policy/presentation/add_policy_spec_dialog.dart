@@ -116,6 +116,17 @@ class AddPolicyDialog extends ConsumerWidget {
                   // prefixIcon: Icon(Icons.attach_money),
                 ),
               ),
+              TextFormField(
+                controller: _controller,
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                decoration: const InputDecoration(
+                  labelText: 'จำนวนครั้ง',
+                  // prefixIcon: Icon(Icons.attach_money),
+                ),
+              ),
             ],
           ),
         ),
