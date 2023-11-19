@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:smart_in_policy/features/core/data/user_service.dart';
 import 'package:smart_in_policy/features/policy/data/policy_services.dart';
-import 'package:smart_in_policy/features/policy/data/policy_spec_model.dart';
 
 Future<void> newPolicySpecDialogBuilder(BuildContext context) {
   return showDialog<void>(
@@ -152,14 +151,15 @@ class AddPolicyDialog extends ConsumerWidget {
           child: const Text('Add'),
           onPressed: () {
             final newSpec = newSpecForm.toPolicySpecObj(
-                specCode: selectedInputTypeCode as int,
-                specPeriodCode: selectedSpecPeriodType);
+              specCode: selectedInputTypeCode as int,
+              specPeriodCode: selectedSpecPeriodType,
+            );
 
-            print(newSpec.specCode);
-            print(newSpec.specPeriodCode);
-            print(newSpec.aaAmount);
-            print(newSpec.aaMonthPeriod);
-            print(newSpec.aaPaymentCount);
+            // print(newSpec.specCode);
+            // print(newSpec.specPeriodCode);
+            // print(newSpec.aaAmount);
+            // print(newSpec.aaMonthPeriod);
+            // print(newSpec.aaPaymentCount);
           },
         ),
       ],

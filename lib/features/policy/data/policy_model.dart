@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Policy {
   // Policy(this.policyNumber, this.policyName, this.policyCompany, this.startDate,
@@ -17,17 +16,17 @@ class Policy {
     this.clientId,
   });
 
-  String policyNumber;
-  String policyName;
-  String policyCompany;
-  DateTime startDate;
-  DateTime endDate;
-  double policyCoverage;
-  double policyCost;
-  String? id;
-  String? clientId;
-  List<Map<int, int>> protections = [];
-  List<CashBenefits> cashIncomes = [];
+  final String policyNumber;
+  final String policyName;
+  final String policyCompany;
+  final DateTime startDate;
+  final DateTime endDate;
+  final double policyCoverage;
+  final double policyCost;
+  final String? id;
+  final String? clientId;
+  final List<Map<int, int>> protections = [];
+  final List<CashBenefits> cashIncomes = [];
 
   Map<String, dynamic> toCollectionObj() {
     return {

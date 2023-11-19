@@ -4,16 +4,18 @@ class PolicySpec {
   PolicySpec({
     required this.specCode,
     required this.specPeriodCode,
+    this.id,
     this.aaAmount,
     this.aaMonthPeriod,
     this.aaPaymentCount,
   });
 
+  final String? id;
   final int specCode; //e.g. 001, 002, 003
   final String specPeriodCode; //e.g.  aa, ab, ac
-  double? aaAmount;
-  int? aaMonthPeriod;
-  int? aaPaymentCount;
+  final double? aaAmount;
+  final int? aaMonthPeriod;
+  final int? aaPaymentCount;
 
   Map<String, dynamic> toCollectionObj() {
     return {
