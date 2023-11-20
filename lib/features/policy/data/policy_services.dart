@@ -9,7 +9,7 @@ import 'package:smart_in_policy/features/policy/data/policy_spec_model.dart';
 import 'package:smart_in_policy/helper_functions.dart';
 
 final selectedClientProvider = StateProvider<Client?>((ref) => null);
-final selectedPolicy = StateProvider<Policy?>((ref) => null);
+final selectedPolicyProvider = StateProvider<Policy?>((ref) => null);
 
 final newPolicyFormProvider =
     StateProvider<NewPolicyForms>((ref) => NewPolicyForms.temp());

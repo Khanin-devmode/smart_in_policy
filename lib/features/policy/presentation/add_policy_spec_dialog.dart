@@ -22,6 +22,7 @@ class AddPolicyDialog extends ConsumerWidget {
     //Selected Input
     final selectedInputTypeCode = ref.watch(selectedInputTypeCodeProvider);
     final selectedSpecPeriodType = ref.watch(selectedSpecPeriodTypeProvider);
+    final selectedPolicy = ref.watch(selectedPolicyProvider);
 
     //User config
     final userConfig = ref.watch(userConfigStreamProvider);
@@ -155,7 +156,9 @@ class AddPolicyDialog extends ConsumerWidget {
               specPeriodCode: selectedSpecPeriodType,
             );
 
-            // print(newSpec.specCode);
+            print(selectedPolicy!.id);
+
+            print(newSpec.specCode);
             // print(newSpec.specPeriodCode);
             // print(newSpec.aaAmount);
             // print(newSpec.aaMonthPeriod);

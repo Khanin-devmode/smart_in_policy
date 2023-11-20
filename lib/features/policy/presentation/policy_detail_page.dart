@@ -14,7 +14,7 @@ class PolicyDetailPage extends ConsumerStatefulWidget {
 class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
   @override
   Widget build(BuildContext context) {
-    final policy = ref.watch(selectedPolicy);
+    final policy = ref.watch(selectedPolicyProvider);
 
     return Scaffold(
       appBar: CommonAppBar(

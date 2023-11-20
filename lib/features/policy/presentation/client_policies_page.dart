@@ -58,7 +58,7 @@ class ClientPolicyPageState extends ConsumerState<ClientPolicyPage> {
                           ),
                           onTap: () {
                             ref
-                                .read(selectedPolicy.notifier)
+                                .read(selectedPolicyProvider.notifier)
                                 .update((state) => data[index]);
                             Navigator.pushNamed(context, rPolicyDetail);
                           },
