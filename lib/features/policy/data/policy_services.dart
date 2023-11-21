@@ -50,6 +50,18 @@ class PolicyService {
       // return Future.error(e);
     }
   }
+
+  Future addSpecToPolicy(Policy policy, PolicySpec spec) async {
+    final subCollection =
+        _firestore.doc(policy.id as String).collection('policySpecs');
+    Map<String, dynamic> specMap = spec.toCollectionObj();
+    try {
+      await subCollection.add(specMap);
+      // return true;
+    } catch (e) {
+      // return Future.error(e);
+    }
+  }
 }
 
 final clientPoliciesStreamProvider = StreamProvider<List<Policy>>((ref) async* {

@@ -19,6 +19,8 @@ class PolicySpec {
 
   Map<String, dynamic> toCollectionObj() {
     return {
+      'specCode': specCode,
+      'specPeriodCode': specPeriodCode,
       'aaAmount': aaAmount,
       'aaMonthPeriod': aaMonthPeriod,
       'aaPaymentCount': aaPaymentCount,
