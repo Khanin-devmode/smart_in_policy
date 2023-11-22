@@ -20,6 +20,8 @@ class Client {
     };
   }
 
+  int get calcAge => DateTime.now().year - dateOfBirth.year;
+
   // Client copyWith({String? id, String? description, bool? completed}) {
   //   return Client(
   //     id: id ?? this.id,
