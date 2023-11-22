@@ -41,8 +41,10 @@ class NewSpecForm {
   PolicySpec toPolicySpecObj(
       {required int specCode, required String specPeriodCode}) {
     return PolicySpec(
-      specCode: specCode,
-      specPeriodCode: specPeriodCode,
-    );
+        specCode: specCode,
+        specPeriodCode: specPeriodCode,
+        aaAmount: double.parse(aaAmount.text),
+        aaMonthPeriod: int.parse(aaMonthPeriod.text),
+        aaPaymentCount: int.parse(aaPaymentCount.text));
   }
 }

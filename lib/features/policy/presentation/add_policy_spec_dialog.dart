@@ -31,6 +31,9 @@ class AddPolicyDialog extends ConsumerWidget {
     final newSpecFormKey = ref.watch(newSpecFormKeyProvider);
     final newSpecForm = ref.watch(newSpecFormProvider);
 
+    //Service
+    final policyService = ref.watch(policyServiceProvider);
+
     final log = Logger('New Policy Spec Form');
 
     // final specPeriods = <String, String>{
@@ -104,7 +107,6 @@ class AddPolicyDialog extends ConsumerWidget {
                 keyboardType: TextInputType.number,
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
-                  ThaiBahtInputFormatter(),
                 ],
                 decoration: const InputDecoration(
                   labelText: 'จำนวนเงิน',
@@ -156,6 +158,8 @@ class AddPolicyDialog extends ConsumerWidget {
               specPeriodCode: selectedSpecPeriodType,
             );
 
+            policyService.addSpecToPolicy(selectedPolicy, newSpec);
+
             print(selectedPolicy!.id);
 
             print(newSpec.specCode);
@@ -166,26 +170,6 @@ class AddPolicyDialog extends ConsumerWidget {
           },
         ),
       ],
-    );
-  }
-}
-
-class ThaiBahtInputFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    // Format the input with Thai Baht symbol and commas
-    String formattedValue = '฿' +
-        newValue.text.replaceAllMapped(
-          RegExp(r"(\d{1,3})(?=(\d{3})+(?!\d))"),
-          (Match match) => '${match.group(1)},',
-        );
-
-    return TextEditingValue(
-      text: formattedValue,
-      selection: TextSelection.fromPosition(
-        TextPosition(offset: formattedValue.length),
-      ),
     );
   }
 }

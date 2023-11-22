@@ -31,6 +31,7 @@ class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
             child: Column(
               children: [
                 Text(policy!.policyName),
+                Text(policy.id as String),
               ],
             ),
           ),
