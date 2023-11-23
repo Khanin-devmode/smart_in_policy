@@ -7,3 +7,4 @@ const rPolicyDetail = '/policy-detail';
 const cPolicies = 'Policies';
 const cClients = 'Clients';
 const cUserConfig = 'Users';
+const cSpec = 'policySpces';
