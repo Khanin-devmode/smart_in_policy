@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:smart_in_policy/features/core/data/user_service.dart';
 import 'package:smart_in_policy/features/policy/data/policy_services.dart';
+import 'package:smart_in_policy/features/policy/data/policy_spec_model.dart';
 
 Future<void> newPolicySpecDialogBuilder(BuildContext context) {
   return showDialog<void>(
@@ -44,9 +45,9 @@ class AddPolicyDialog extends ConsumerWidget {
 
     return AlertDialog(
       title: const Text('New Policy Spec'),
-      content: SingleChildScrollView(
-        child: Form(
-          key: newSpecFormKey,
+      content: Form(
+        key: newSpecFormKey,
+        child: SingleChildScrollView(
           child: Column(
             children: [
               userConfig.when(
@@ -112,6 +113,9 @@ class AddPolicyDialog extends ConsumerWidget {
                   labelText: 'จำนวนเงิน',
                   // prefixIcon: Icon(Icons.attach_money),
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) return 'Field is empty';
+                },
               ),
               TextFormField(
                 controller: newSpecForm.aaMonthPeriod,
@@ -123,6 +127,9 @@ class AddPolicyDialog extends ConsumerWidget {
                   labelText: 'ทุกๆ',
                   // prefixIcon: Icon(Icons.attach_money),
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) return 'Field is empty';
+                },
               ),
               TextFormField(
                 controller: newSpecForm.aaPaymentCount,
@@ -134,6 +141,9 @@ class AddPolicyDialog extends ConsumerWidget {
                   labelText: 'จำนวนครั้ง',
                   // prefixIcon: Icon(Icons.attach_money),
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) return 'Field is empty';
+                },
               ),
             ],
           ),
@@ -145,7 +155,11 @@ class AddPolicyDialog extends ConsumerWidget {
             textStyle: Theme.of(context).textTheme.labelLarge,
           ),
           child: const Text('Reset Form'),
-          onPressed: () {},
+          onPressed: () {
+            ref
+                .read(newSpecFormProvider.notifier)
+                .update((state) => NewSpecForm());
+          },
         ),
         TextButton(
           style: TextButton.styleFrom(
@@ -153,20 +167,24 @@ class AddPolicyDialog extends ConsumerWidget {
           ),
           child: const Text('Add'),
           onPressed: () {
-            final newSpec = newSpecForm.toPolicySpecObj(
-              specCode: selectedInputTypeCode as int,
-              specPeriodCode: selectedSpecPeriodType,
-            );
+            log.info('${newSpecFormKey.currentState!.validate()}');
+            if (newSpecFormKey.currentState!.validate()) {
+              final newSpec = newSpecForm.toPolicySpecObj(
+                specCode: selectedInputTypeCode as int,
+                specPeriodCode: selectedSpecPeriodType,
+              );
 
-            policyService.addSpecToPolicy(selectedPolicy, newSpec);
-
-            print(selectedPolicy!.id);
-
-            print(newSpec.specCode);
-            // print(newSpec.specPeriodCode);
-            // print(newSpec.aaAmount);
-            // print(newSpec.aaMonthPeriod);
-            // print(newSpec.aaPaymentCount);
+              policyService
+                  .addSpecToPolicy(selectedPolicy, newSpec)
+                  .then((value) {
+                ref
+                    .read(newSpecFormProvider.notifier)
+                    .update((state) => NewSpecForm());
+                Navigator.pop(context);
+              });
+            } else {
+              log.info('form is not validate');
+            }
           },
         ),
       ],

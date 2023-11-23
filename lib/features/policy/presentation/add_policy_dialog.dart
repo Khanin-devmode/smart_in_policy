@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 import 'package:smart_in_policy/features/policy/data/policy_model.dart';
 import 'package:smart_in_policy/features/policy/data/policy_services.dart';
 
@@ -23,6 +24,8 @@ class AddPolicyDialog extends ConsumerWidget {
     final newPolicyFormKey = ref.watch(newPolicyFormKeyProvider);
     final currentYear = DateTime.now().year + 543;
     final selectedClient = ref.watch(selectedClientProvider);
+
+    final log = Logger('New Policy Dialog');
 
     return AlertDialog(
       title: const Text('New Policy Form'),
@@ -285,14 +288,6 @@ class AddPolicyDialog extends ConsumerWidget {
                     .update((state) => NewPolicyForms());
                 Navigator.pop(context);
               });
-              // clientService
-              //     .addClient(newClientForm.toClientObj())
-              //     .then((value) {
-              //   ref
-              //       .read(newClientFormProvider.notifier)
-              //       .update((state) => NewClientForms());
-              //   Navigator.pop(context);
-              // });
             }
           },
         ),
