@@ -135,28 +135,9 @@ final policySpecsStreamProvider =
 
     if (snapshot.docs.isNotEmpty) {
       for (DocumentSnapshot policySpecDoc in snapshot.docs) {
-        // DateTime startDate = toDateTime(clientPolicyDoc.get('startDate'));
-        // DateTime endDate = toDateTime(clientPolicyDoc.get('endDate'));
-
-        // Policy policy = Policy(
-        //   policyNumber: clientPolicyDoc.get('policyNumber'),
-        //   policyName: clientPolicyDoc.get('policyName'),
-        //   policyCompany: clientPolicyDoc.get('policyCompany'),
-        //   startDate: startDate,
-        //   endDate: endDate,
-        //   /*.get will return either int or double depends on what store on
-        //    firestore. to make it always a double we reverse either to string
-        //    first and parse to double. */
-        //   policyCoverage:
-        //       double.parse(clientPolicyDoc.get('policyCoverage').toString()),
-        //   policyCost:
-        //       double.parse(clientPolicyDoc.get('policyCost').toString()),
-        //   id: clientPolicyDoc.id,
-        //   clientId: clientPolicyDoc.get('clientId'),
-        // );
         PolicySpec spec = PolicySpec(
           specCode: policySpecDoc.get('specCode'),
-          specPeriodCode: ('specPeriodCode'),
+          specPeriodCode: policySpecDoc.get('specPeriodCode'),
         );
 
         policySpecs = [...policySpecs, spec];

@@ -56,10 +56,8 @@ class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
                           children: List.generate(
                             data.length,
                             (i) => Chip(
-                              avatar: CircleAvatar(
-                                  backgroundColor: Colors.blue.shade900,
-                                  child: const Text('ML')),
-                              label: Text(data[i].specCode.toString()),
+                              label: Text(
+                                  '${data[i].specCode}: ${data[i].specPeriodCode}'),
                             ),
                           ));
                     } else {
