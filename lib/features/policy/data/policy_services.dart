@@ -117,15 +117,21 @@ final policySpecsStreamProvider =
     StreamProvider<List<PolicySpec>>((ref) async* {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  var policySpecs = const <PolicySpec>[];
+  var policySpecs = <PolicySpec>[];
+
   Policy? selectedPolicy = ref.watch(selectedPolicyProvider);
+
+  final logger = Logger('Policy Spec Stream');
+  logger.info('${selectedPolicy!.id}');
 
   await for (var snapshot in firestore
       .collection(cPolicies)
-      .doc(selectedPolicy!.id)
+      .doc(selectedPolicy.id)
       .collection(cSpec)
       .snapshots()) {
     policySpecs = [];
+
+    logger.info(snapshot);
 
     if (snapshot.docs.isNotEmpty) {
       for (DocumentSnapshot policySpecDoc in snapshot.docs) {
