@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:smart_in_policy/common/ui/common_app_bar.dart';
+import 'package:smart_in_policy/features/core/data/user_service.dart';
 import 'package:smart_in_policy/features/policy/data/policy_services.dart';
 import 'package:smart_in_policy/features/policy/presentation/add_policy_spec_dialog.dart';
 
@@ -18,6 +19,7 @@ class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
     final policy = ref.watch(selectedPolicyProvider);
 
     final policySpecs = ref.watch(policySpecsStreamProvider);
+    final userConfig = ref.watch(userConfigProvider);
 
     final log = Logger('Policy Detail Page');
 
@@ -51,15 +53,29 @@ class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
                   data: (data) {
                     if (data.isNotEmpty) {
                       return Wrap(
-                          spacing: 8.0, // gap between adjacent chips
-                          runSpacing: 4.0, // gap between lines
-                          children: List.generate(
-                            data.length,
-                            (i) => Chip(
-                              label: Text(
-                                  '${data[i].specCode}: ${data[i].specPeriodCode}'),
+                        spacing: 8.0, // gap between adjacent chips
+                        runSpacing: 4.0, // gap between lines
+                        children: List.generate(
+                          data.length,
+                          // (i) => Chip(
+                          //   label: Text(
+                          //       '${data[i].specCode}: ${data[i].specPeriodCode}'),
+                          // ),
+                          (i) => Card(
+                            child: SizedBox(
+                              width: 80,
+                              height: 100,
+                              child: Column(
+                                children: [
+                                  Text(data[i].specCode.toString()),
+                                  Text(
+                                      userConfig.getInputName(data[i].specCode))
+                                ],
+                              ),
                             ),
-                          ));
+                          ),
+                        ),
+                      );
                     } else {
                       return Text('List is still empty');
                     }
@@ -118,294 +134,6 @@ class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
                         backgroundColor: Colors.blue.shade900,
                         child: const Text('AH')),
                     label: const Text('Hamilton'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('ML')),
-                    label: const Text('Lafayette'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('HM')),
-                    label: const Text('Mulligan'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('AH')),
-                    label: const Text('Hamilton'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('ML')),
-                    label: const Text('Lafayette'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('HM')),
-                    label: const Text('Mulligan'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('AH')),
-                    label: const Text('Hamilton'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('ML')),
-                    label: const Text('Lafayette'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('HM')),
-                    label: const Text('Mulligan'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('AH')),
-                    label: const Text('Hamilton'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('ML')),
-                    label: const Text('Lafayette'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('HM')),
-                    label: const Text('Mulligan'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('AH')),
-                    label: const Text('Hamilton'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('ML')),
-                    label: const Text('Lafayette'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('HM')),
-                    label: const Text('Mulligan'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('AH')),
-                    label: const Text('Hamilton'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('ML')),
-                    label: const Text('Lafayette'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('HM')),
-                    label: const Text('Mulligan'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('AH')),
-                    label: const Text('Hamilton'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('ML')),
-                    label: const Text('Lafayette'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('HM')),
-                    label: const Text('Mulligan'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
-                  ),
-                  Chip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Colors.blue.shade900,
-                        child: const Text('JL')),
-                    label: const Text('Laurens'),
                   ),
                 ],
               )

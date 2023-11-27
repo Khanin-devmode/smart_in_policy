@@ -40,9 +40,14 @@ final userConfigStreamProvider = StreamProvider<UserConfig>((ref) async* {
     }
     log.info(inputTypes.toString());
     // print('from service: $inputTypes');
-    yield UserConfig(inputTypes);
+    final newConfig = UserConfig(inputTypes: inputTypes);
+    ref.read(userConfigProvider.notifier).update((state) => newConfig);
+    yield newConfig;
   }
 });
+
+final userConfigProvider =
+    StateProvider<UserConfig>((ref) => UserConfig(inputTypes: {}));
 
 final selectedInputTypeCodeProvider = StateProvider<int?>((ref) => null);
 
