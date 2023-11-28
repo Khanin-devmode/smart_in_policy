@@ -17,12 +17,13 @@ class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
   @override
   Widget build(BuildContext context) {
     final policy = ref.watch(selectedPolicyProvider);
-
     final policySpecs = ref.watch(policySpecsStreamProvider);
+
+    ref.watch(userConfigStreamProvider); // To load config and update app.
+
     final userConfig = ref.watch(userConfigProvider);
 
     final log = Logger('Policy Detail Page');
-
     log.info(policySpecs);
 
     return Scaffold(
@@ -59,21 +60,30 @@ class PolicyDetailPageState extends ConsumerState<PolicyDetailPage> {
                           data.length,
                           // (i) => Chip(
                           //   label: Text(
-                          //       '${data[i].specCode}: ${data[i].specPeriodCode}'),
+                          //       '${spec.specCode}: ${spec.specPeriodCode}'),
                           // ),
-                          (i) => Card(
-                            child: SizedBox(
-                              width: 80,
-                              height: 100,
-                              child: Column(
-                                children: [
-                                  Text(data[i].specCode.toString()),
-                                  Text(
-                                      userConfig.getInputName(data[i].specCode))
-                                ],
+                          (i) {
+                            final spec = data[i];
+                            return Card(
+                              child: SizedBox(
+                                width: 100,
+                                child: Column(
+                                  children: [
+                                    Text(spec.specCode.toString()),
+                                    Text(
+                                      userConfig.getInputName(spec.specCode),
+                                    ),
+                                    Text(spec.specPeriodCode),
+                                    Text(kSpecPeriodTypes[spec.specPeriodCode]
+                                        as String),
+                                    Text(spec.aaAmount!.toStringAsFixed(0)),
+                                    Text(spec.aaMonthPeriod.toString()),
+                                    Text(spec.aaPaymentCount.toString()),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
                       );
                     } else {

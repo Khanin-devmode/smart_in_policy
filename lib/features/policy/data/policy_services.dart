@@ -136,9 +136,12 @@ final policySpecsStreamProvider =
     if (snapshot.docs.isNotEmpty) {
       for (DocumentSnapshot policySpecDoc in snapshot.docs) {
         PolicySpec spec = PolicySpec(
-          specCode: policySpecDoc.get('specCode'),
-          specPeriodCode: policySpecDoc.get('specPeriodCode'),
-        );
+            id: policySpecDoc.id,
+            specCode: policySpecDoc.get('specCode'),
+            specPeriodCode: policySpecDoc.get('specPeriodCode'),
+            aaAmount: policySpecDoc.get('aaAmount'),
+            aaMonthPeriod: policySpecDoc.get('aaMonthPeriod'),
+            aaPaymentCount: policySpecDoc.get('aaPaymentCount'));
 
         policySpecs = [...policySpecs, spec];
         yield policySpecs;
